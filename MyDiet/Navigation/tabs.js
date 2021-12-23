@@ -4,7 +4,8 @@ import{
     Image,
     ImageBackground,
     backgroundColor,
-    ImageBackgroundBase
+    ImageBackgroundBase,
+    SafeAreaView,
 } from "react-native";
 import { icons,Colors } from '../constants';
 import {createBottomTabNavigator, BottomTabBar} from "@react-navigation/bottom-tabs"
@@ -13,6 +14,7 @@ import TabComponent from "./TabButton";
 const Tab=createBottomTabNavigator();
 const Tabs=() => {
     return(
+        <SafeAreaView style={{ flex: 1 }}>
         <Tab.Navigator 
             tabBarOptions={{
                 showLabel: false,
@@ -69,6 +71,7 @@ const Tabs=() => {
               }}
               />
         </Tab.Navigator>
+        </SafeAreaView>
     )
 }
 export default Tabs;

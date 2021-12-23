@@ -2,9 +2,10 @@
 import { Text, View } from 'react-native';
 import {createStackNavigator} from "@react-navigation/stack"
 import {NavigationContainer} from "@react-navigation/native"
-import {FA,Feed,Intro1} from "./screens"
+import {FA,Feedk,Intro1} from "./screens"
 import Tabs from "./Navigation/tabs"
 import * as React from 'react';
+
 const Stack= createStackNavigator();
 const HelloWorldApp = () => {
   return (
@@ -13,9 +14,9 @@ const HelloWorldApp = () => {
           screenOptions={{
             headerShown: false
           }}
-          initialRouteName="Intro1"
+          initialRouteName="Tabs"
       >
-      <Stack.Screen name="Intro1" component={Tabs} /> 
+      <Stack.Screen name="Tabs" component={Intro1} /> 
       </Stack.Navigator>
     </NavigationContainer> 
   )

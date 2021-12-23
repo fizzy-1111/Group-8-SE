@@ -1,4 +1,4 @@
 import icons from "./icons"
 import { Colors } from "./Theme";
-
-export {icons,Colors};
+import images from "./images"
+export {icons,Colors,images};

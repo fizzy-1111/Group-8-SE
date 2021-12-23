@@ -4,19 +4,18 @@ import {
     Text,
     TextInput,
     StyleSheet,
-    Image
+    Image,
+    SafeAreaView,
 } from "react-native";
 import { Colors,icons } from "../constants";
 const FA =() => {
     return(
         <View style={styles.container}>
+          <SafeAreaView style={styles.safeview}>
             <TextInput placeholder="Search here.." style={styles.textStyle} />
             <Image source={icons.search} style={styles.search}/>
-        </View>,
-         <View style={styles.container}>
-         <TextInput placeholder="Search here.." style={styles.textStyle} />
-         <Image source={icons.search} style={styles.search}/>
-     </View>
+          </SafeAreaView>
+        </View>
     )
 }
 const styles = StyleSheet.create({
@@ -31,6 +30,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection:'row',
         alignItems:'center',
+    },
+    safeview:{
+
     },
     search:{
         width:25,
