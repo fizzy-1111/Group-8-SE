@@ -8,7 +8,7 @@ import{
 } from "react-native";
 import { icons,Colors } from '../constants';
 import {createBottomTabNavigator, BottomTabBar} from "@react-navigation/bottom-tabs"
-import {Feed,FA} from "../screens";
+import {Feedk,FA} from "../screens";
 import TabComponent from "./TabButton";
 const Tab=createBottomTabNavigator();
 const Tabs=() => {
@@ -35,8 +35,8 @@ const Tabs=() => {
             }}
         >
             <Tab.Screen
-              name="Feed"
-              component={Feed}
+              name="Feedk"
+              component={Feedk}
               options={{
                   tabBarButton:(props) => <TabComponent iconname={icons.feed}{...props}/>,
                   headerShown: false
@@ -53,7 +53,7 @@ const Tabs=() => {
              />
              <Tab.Screen
               name="About us"
-              component={Feed}
+              component={Feedk}
               options={{
                 tabBarButton:(props) => <TabComponent iconname={icons.about}{...props}/>,
                 headerShown: false
@@ -62,7 +62,7 @@ const Tabs=() => {
              />
              <Tab.Screen
               name="Profile"
-              component={Feed}
+              component={Feedk}
               options={{
                 tabBarButton:(props) => <TabComponent iconname={icons.profile}{...props}/>,
                 headerShown: false
