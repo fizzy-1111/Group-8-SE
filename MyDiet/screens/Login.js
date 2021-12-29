@@ -19,8 +19,8 @@ const Login=()=>{
     return(
         <View style={styles.container}>
            <SafeAreaView style={styles.safeview}>
-            <Text style={styles.textStyle}><B>Creat Account</B></Text>
-            <Text style={styles.textStyle2}>Create new account</Text>
+            <Text style={styles.textStyle}><B>Welcome Back</B></Text>
+            <Text style={styles.textStyle2}>Sign in to continue</Text>
             <SafeAreaView style={styles.input} >
                 <Image  style={styles.icon1} source={icons.human}/>
                 <TextInput
@@ -42,13 +42,13 @@ const Login=()=>{
                 style={styles.button}
                 onPress={onPress}
             >
-                 <Text style={styles.textStyle3}><B>Create Account</B></Text>
+                 <Text style={styles.textStyle3}><B>Login</B></Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={styles.button2}
                 onPress={onPress}
             >
-                 <Text style={styles.textStyle4}><B>Login</B></Text>
+                 <Text style={styles.textStyle4}><B> Sign Up</B></Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={styles.button3}
@@ -91,6 +91,7 @@ const styles=StyleSheet.create({
         height:50,
         flexDirection:'row',
 
+
     },
     Tinput:{
         marginVertical:8,
@@ -116,6 +117,8 @@ const styles=StyleSheet.create({
         backgroundColor:Colors.iconColor,
         borderRadius: 8,
         marginTop:130,
+        bottom: 160,
+        position: 'absolute',
     },
     button2:{
         width:windowWidth*9/10,
@@ -124,6 +127,8 @@ const styles=StyleSheet.create({
         backgroundColor:Colors.whiteColor,
         borderRadius: 8,
         marginTop:10,
+        bottom: 100,
+        position: 'absolute',
     },
     button3:{
         width:windowWidth*7/10,
@@ -131,6 +136,8 @@ const styles=StyleSheet.create({
         alignItems: "center",
         borderRadius: 8,
         marginTop:20,
+        bottom: 50,
+        position: 'absolute',
     },
     textStyle3:{
         fontSize:18,

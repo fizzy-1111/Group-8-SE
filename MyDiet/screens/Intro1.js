@@ -21,24 +21,34 @@ const Intro1 =() => {
     //   });
     return(
            <View style={styles.container}>
-           <SafeAreaView style={styles.safeview}>
-             <Text style={styles.textStyle}>MyDiet</Text>
-            <Image source={images.intro1} style={styles.imageStyle} />
-            <Text style={styles.textStyle1}>Connect to your dietitian</Text>
-            <Text style={styles.textStyle2}>Learn from professional</Text>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={onPress}
-            >
-                 <Text style={styles.textStyle3}>Let's Start</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.button2}
-                onPress={onPress}
-            >
-                 <Text style={styles.textStyle4}>Already have an account? <B>Login</B></Text>
-            </TouchableOpacity>
-           </SafeAreaView>
+                <View style={styles.topview} >
+                  <Text style={styles.textStyle}>MyDiet</Text>
+
+                </View>
+                  <Image source={images.intro1} style={styles.imageStyle} />
+                <View style={styles.introview1} >
+                    <Text style={styles.textStyle1}>      Connect to your dietitian</Text>
+                </View>
+                <View style={styles.introview2} >
+                    <Text style={styles.textStyle2}>      Learn from professional</Text>
+                </View>
+                <View style={styles.buttonView1}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={onPress}
+                    >
+                        <Text style={styles.textStyle3}>Let's Start</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.buttonView2}>
+                <TouchableOpacity
+                    style={styles.button2}
+                    onPress={onPress}
+                >
+                    <Text style={styles.textStyle4}>Already have an account? <B>Login</B></Text>
+                </TouchableOpacity> 
+
+                </View>
          </View>
     )
 }
@@ -46,24 +56,67 @@ const styles = StyleSheet.create({
     container:{
         height: windowHeight,
         width: windowWidth,
+        flex:1,
+        flexDirection:'column',
         backgroundColor:Colors.primary,
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    // top:{
+    //     flex:2,
+        
+    //     alignItems:'center',
+    //     justifyContent:'center'
+    
+    // },
+    // mid:{
+    //     flex:1,
+       
+    //     alignItems:'center',
+    //     justifyContent:'center'
+    
+    // },
+    // bot:{
+    //     flex:1,
+       
+    //     alignItems:'center',
+    //     justifyContent:'center'
+    
+    // }
+    topview:{
+        alignItems:'center',
+        justifyContent:'center',
+        flex:1,
+      
+    },
+    introview1:{
+        
+        justifyContent:'center',
+        alignItems:'flex-start',
+        alignSelf:'flex-start',
+        flex:0.5,
+      
+    },
+    introview2:{
+        
+        justifyContent:'center',
+        alignItems:'flex-start',
+        alignSelf:'flex-start',
+        flex:0.5,
+        
     },
     textStyle:{
         fontSize:40,
-        paddingBottom:10,
+    
+      
         // fontFamily:'workSans',
     },
     textStyle1:{
         fontSize:30,
-        paddingBottom:10,
-        alignSelf:'flex-start',
-        paddingStart:20,
         // fontFamily:'workSans',
     },
     textStyle2:{
         fontSize:18,
-        paddingBottom:50,
-        alignSelf:'flex-start',
         paddingStart:20,
         // fontFamily:'workSans',
     },
@@ -78,32 +131,41 @@ const styles = StyleSheet.create({
         color:Colors.iconColor,
         paddingTop:2
     },
-    safeview:{
-        alignItems:'center',
-        flexDirection:'column',
-        marginTop:30,
-        marginBottom:30,
-    },
     imageStyle:{
-        height: windowHeight*5/10,
-        width: windowWidth*9/10,
+        flex:4,
+        width:'100%',
+        height:'100%',
     },
     button:{
-        width:windowWidth*9/10,
-        height:50,
         alignItems: "center",
+        justifyContent:'center',
         backgroundColor:Colors.iconColor,
         borderRadius: 8,
+        height:'50%',
+        width:'100%'
         //justifyContent: 'flex-end',
-        bottom:-20,
+
     },
     button2:{
-        width:windowWidth*7/10,
-        height:30,
         alignItems: "center",
+        justifyContent:'center',
         backgroundColor:Colors.whiteColor,
         borderRadius: 8,
-        bottom:-25
+        marginTop:10,
+        backgroundColor:Colors.whiteColor,
+        height:'40%',
+        width:'100%'
+        //position: 'absolute',
+    },
+    buttonView1:{
+        flex:1,
+        alignItems: "center",
+        justifyContent:'flex-end',
+    },
+    buttonView2:{
+        flex:1,
+        alignItems: "center",
+        justifyContent:'flex-start',
     }
 })
 export default Intro1;

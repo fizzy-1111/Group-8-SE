@@ -19,7 +19,9 @@ const FA =() => {
     )
 }
 const styles = StyleSheet.create({
-    container:{
+
+   
+    safeview:{
         marginTop: 30,
         marginHorizontal: 18,
         height: 30,
@@ -30,9 +32,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection:'row',
         alignItems:'center',
-    },
-    safeview:{
-
     },
     search:{
         width:25,
