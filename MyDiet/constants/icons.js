@@ -7,6 +7,9 @@ export const human=require("../assets/icons/human.png");
 export const lock=require("../assets/icons/lock.png");
 export const phone=require("../assets/icons/phone.png");
 export const email=require("../assets/icons/email.png");
+export const addButton=require("../assets/icons/addButton.png");
+export const comment=require("../assets/icons/comment.png");
+export const favorite=require("../assets/icons/favorite.png");
 export default {
     feed,
     checklist,
@@ -17,4 +20,7 @@ export default {
     lock,
     phone,
     email,
+    addButton,
+    comment,
+    favorite,
 }

@@ -18,7 +18,12 @@ const Tabs=() => {
         <Tab.Navigator 
             tabBarOptions={{
                 showLabel: false,
+                
             }}   
+            screenOpitons={{
+                tabBarHideOnKeyboard:true,
+                tabBarVisible:false,
+              }}
             const screenOptions={{
                 tabBarStyle:{
                     backgroundColor:Colors.whiteColor,
