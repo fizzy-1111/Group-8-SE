@@ -9,7 +9,7 @@ import{
 } from "react-native";
 import { icons,Colors } from '../constants';
 import {createBottomTabNavigator, BottomTabBar} from "@react-navigation/bottom-tabs"
-import {Feedk,FA,Feed} from "../screens";
+import {Feedk,FA,Feed,Profile} from "../screens";
 import TabComponent from "./TabButton";
 const Tab=createBottomTabNavigator();
 const Tabs=() => {
@@ -69,7 +69,7 @@ const Tabs=() => {
              />
              <Tab.Screen
               name="Profile"
-              component={Feedk}
+              component={Profile}
               options={{
                 tabBarButton:(props) => <TabComponent iconname={icons.profile}{...props}/>,
                 headerShown: false

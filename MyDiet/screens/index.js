@@ -4,6 +4,8 @@ import Feedk from "./Feedk";
 import Intro1 from "./Intro1";
 import Login  from "./Login";
 import SignUp from "./Signup";
+import Profile from "./Profile";
+import ProfileDetails from "./ProfileDetails";
 export {
     FA,
     Feed,
@@ -11,4 +13,6 @@ export {
     Feedk,
     Login,
     SignUp,
+    Profile,
+    ProfileDetails,
 }

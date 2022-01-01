@@ -10,6 +10,12 @@ export const email=require("../assets/icons/email.png");
 export const addButton=require("../assets/icons/addButton.png");
 export const comment=require("../assets/icons/comment.png");
 export const favorite=require("../assets/icons/favorite.png");
+export const ExitSign=require("../assets/icons/ExitSign.png");
+export const Upgrade=require("../assets/icons/Upgrade.png");
+export const dietian=require("../assets/icons/dietian.jpg");
+export const expandright=require("../assets/icons/expandright.png");
+export const backbutton=require("../assets/icons/backbutton.png");
+export const edit=require("../assets/icons/edit.png");
 export default {
     feed,
     checklist,
@@ -23,4 +29,11 @@ export default {
     addButton,
     comment,
     favorite,
+    ExitSign,
+    Upgrade,
+    dietian,
+    expandright,
+    backbutton,
+    edit,
+    
 }
