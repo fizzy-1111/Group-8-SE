@@ -13,14 +13,24 @@ import{
     FlatList
 } from "react-native";
 import { Colors,icons,images } from "../constants";
-import styled from "styled-components/native"
+import styled from "styled-components/native";
+import BottomSheet from "reanimated-bottom-sheet";
+
+import Animated from 'react-native-reanimated'
+import { ScrollView } from 'react-native-gesture-handler';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const Container =styled.TouchableWithoutFeedback``;
 const B = (props) => <Text style={{fontWeight: 'bold'}}>{props.children}</Text>;
-const onPress = ()=>{
-    console.log("Pressing")
+var commentData=[];
+const onPress = (item,sheetref)=>{
+    if (typeof(item) != "undefined"){
+        commentData=item.comment
+        sheetref.current.snapTo(0);
+        console.log(1)
+    }
 };
+
 const listTab=[
     {
         status: 'Private feed'
@@ -38,6 +48,23 @@ const Privatedata=[
         imagepost:images.foodImage,
         likenum:7,
         key:'1',
+        comment:[
+           {
+               username:'Phat',
+               imagesource:images.avatar,
+               data:'08:00 pm, 20/11/2021',
+               cm:'Goodjob',
+               id:'1'
+           },
+           {
+            username:'Tuong',
+            imagesource:images.avatar1,
+            data:'08:00 pm, 20/11/2022',
+            cm:'Thank you',
+            id:'2'
+        }
+        ],
+        
     },
     {
         name:'HL2',
@@ -60,7 +87,69 @@ const Publicdata=[
         key:'1',
     }
 ]
-const renderItem=({item,id})=>{
+const renderContent = () => (
+    <View
+      style={{
+        backgroundColor: Colors.primary,
+        height: windowHeight,
+        width:windowWidth,
+        paddingHorizontal:10,
+        
+      }}
+    >
+     <SafeAreaView
+      style={{
+        alignItems:'center',
+        flexDirection:'column',
+        justifyContent:'center',
+        marginTop:40,
+      }}
+     >
+      
+
+     </SafeAreaView>
+     <SafeAreaView
+     style={{
+        alignItems:'center',
+        flexDirection:'column',
+        justifyContent:'center',
+        backgroundColor:Colors.whiteColor,
+        height:windowHeight-170,
+        marginTop:20,
+        
+      }}
+      >
+        <Text>{console.log(2)}</Text>
+        <FlatList
+            
+            data={commentData}
+            renderItem={renderCommentItem}
+            style={styles.flatlist}
+        />
+     </SafeAreaView>
+    </View>
+  );
+const renderCommentItem=({item,id})=>{
+    console.log("Hello  ")
+    return(
+    
+    <SafeAreaView style={styles.headBar}>
+    <Image source={item.imagesource}/> 
+    <View style={styles.infoview}>
+        <Text style={styles.textTab}> 
+               <B>{item.username }</B> 
+        </Text>
+        <Text style={styles.textTab}> 
+                {item.data }
+        </Text>
+    </View>
+    
+  </SafeAreaView>
+   )
+}
+const renderItem=({item,id},sheetref)=>{
+    fall=new Animated.Value(1);
+
     return(
       <SafeAreaView style={styles.post} >
         <SafeAreaView style={styles.headBar}>
@@ -88,13 +177,15 @@ const renderItem=({item,id})=>{
             <Text style={styles.likeTab}> 
                            <B>Like {item.likenum}</B> 
             </Text>
-            <Image source={icons.comment} style={styles.imageCheck}/>
+            <Container onPress={()=> {onPress(item,sheetref)}}    > 
+                  <Image source={icons.comment} style={styles.imageCheck}/>
+             </Container>
         </View>
       </SafeAreaView> 
     )
 }                
 const getStatus=(status)=>{
-    console.log(status)
+
    if(status=='Public feed')
    return Publicdata
    else if(status=='Private feed')
@@ -106,8 +197,11 @@ const Feed=() => {
     const setStatusFilter=status => {
         setStatus(status)
     }
+    const sheetRef = React.createRef();
+    fall=new Animated.Value(1);
     return(
         <SafeAreaView style={styles.container}>
+           
            <SafeAreaView style={styles.listTab} >
              {
                 listTab.map(e=>(
@@ -123,7 +217,7 @@ const Feed=() => {
              }
             </SafeAreaView>
             <SafeAreaView style={styles.headBar}>
-                    <Container onPress={onPress}> 
+                    <Container onPress={onPress()}> 
                         <Image source={icons.addButton} style={styles.iconStyle}/>
                     </Container>
                 <View  style={styles.borderView}>
@@ -137,23 +231,32 @@ const Feed=() => {
          <FlatList
           
           data={getStatus(status)}
-          renderItem={renderItem}
+          renderItem={(item)=>renderItem(item,sheetRef)}
           style={styles.flatlist}
-         />
-
+         >
+          {renderContent}
+         </FlatList>
+         <BottomSheet
+            ref={sheetRef}
+            snapPoints={[windowHeight, 0, 0]}
+            
+            initialSnap={1}
+            renderContent={renderContent}
+            borderRadius={10}/>
         </SafeAreaView>
+       
     )
 }
 const styles =StyleSheet.create({
     container:{
      flex:1,
-     paddingHorizontal:10,
+     
      justifyContent:'center',
      alignItems:'center',
      backgroundColor:Colors.primary,
     },
     headBar:{
-        paddingTop:10,
+        
         justifyContent: 'space-between',
         flexDirection:'row',
         alignItems:'center',
@@ -194,6 +297,7 @@ const styles =StyleSheet.create({
     post:{
         backgroundColor:Colors.whiteColor,
         borderRadius: 10,
+        marginBottom:10
     },
     imageCheck:{
         marginTop:10,
@@ -213,12 +317,12 @@ const styles =StyleSheet.create({
         width:windowWidth*9/10,
         paddingLeft:10,
         paddingRight:10,
-        paddingTop:15
+        paddingBottom:5
     },
     listTab:{
       padding:15,
       flexDirection:'row',
-      marginTop:50,
+      marginTop:20,
       
     },
     btnTab:{
