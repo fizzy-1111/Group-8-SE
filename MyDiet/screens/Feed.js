@@ -67,6 +67,22 @@ const Privatedata = [
     imagepost: images.foodImage1,
     likenum: 8,
     key: "2",
+    comment: [
+        {
+          username: "Linh",
+          imagesource: images.imageprofile,
+          data: "08:00 pm, 20/11/2021",
+          cm: "Cai Lin",
+          id: "1",
+        },
+        {
+          username: "Tuyen",
+          imagesource: images.avatar1,
+          data: "08:00 pm, 20/11/2022",
+          cm: "T met",
+          id: "2",
+        },
+      ],
   },
 ];
 const Publicdata = [
@@ -120,10 +136,10 @@ const renderContent = () => {
 const renderCommentItem = ({ item, id }) => {
   return (
     <SafeAreaView style={styles.headBar}>
-      <Image source={item.imagesource} />
+    <Image source={item.imagesource} style={{width:50,height:50,borderRadius:100}}/>
       <View style={styles.infoview}>
         <Text style={styles.textTab}>
-          <B>{item.username}</B>
+          <B>{item.username}</B>    {item.cm}
         </Text>
         <Text style={styles.textTab}>{item.data}</Text>
       </View>
@@ -231,6 +247,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
   },
   headBar: {
+    marginTop:15,
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",

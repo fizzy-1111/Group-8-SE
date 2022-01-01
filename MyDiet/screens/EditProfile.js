@@ -5,6 +5,7 @@ import {
     SafeAreaView,
     Image,
     StyleSheet,
+    TextInput,
     
 } from 'react-native'
 
@@ -19,61 +20,59 @@ const getUsername=()=>{
     return 'Hoang Linh'
 }
 const onPress = ()=>{
-   console.log('hello')
 };
 const onPressBack = ({navigation})=>{
-    navigation.navigate("Tabs")
+    navigation.navigate("Profile Detail")
  };
-let person = {Name:"Tuyen Ganh Team",email:"Tuyen@gmail.com",phonenumber:'0973066661',about:'need to gain weight'};
-const ProfileDetails=({navigation}) => {
+const EditProfile=({navigation}) => {
    return(
-       <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
 
-           <View
-            style={styles.top}
-           >
+        <View
+        style={styles.top}
+        >
             <Container onPress={()=> {onPressBack({navigation})}}> 
-                 <Image source={icons.backbutton}/>
+                <Image source={icons.backbutton}/>
             </Container>
             <Text style={{fontSize:18}}>Profile Detail</Text>
             <Container onPress={()=> {onPress()}}> 
-                 <Image source={icons.edit}/>
+                <Image source={icons.edit}/>
             </Container>
-           </View>
-           <View  style={styles.mid}>
-            <Image source={getImage()} style={styles.profileImage}/>
-       
-           </View>
-           <View  style={styles.bot}> 
-             <View style={styles.setting}>
+        </View>
+        <View  style={styles.mid}>
+         <Image source={getImage()} style={styles.profileImage}/>
+
+        </View>
+        <View  style={styles.bot}> 
+            <View style={styles.setting}>
                 <Text style={{fontSize:18,fontWeight:'bold'}}>Name</Text>
                 <View style={{alignItems:'flex-start',width:'60%'}}>
                     <Text style={{fontSize:16,}}>{person.Name}</Text>
                 </View>
-             </View>
-             <View style={styles.setting}>
-             <Text style={{fontSize:18,fontWeight:'bold'}}>Email</Text>
+            </View>
+            <View style={styles.setting}>
+                <Text style={{fontSize:18,fontWeight:'bold'}}>Email</Text>
                 <View style={{alignItems:'flex-start',width:'60%'}}>
                     <Text style={{fontSize:16,}}>{person.email}</Text>
                 </View>
-               
-             </View>
-             <View style={styles.setting}>
-             <Text style={{fontSize:18,fontWeight:'bold'}}>Phone number</Text>
-                <View style={{alignItems:'flex-start',width:'60%'}}>
-                    <Text style={{fontSize:16,}}>{person.phonenumber}</Text>
-                </View>
-             </View>
-             <View style={styles.setting}>
-             <Text style={{fontSize:18,fontWeight:'bold'}}>About</Text>
+                
+            </View>
+            <View style={styles.setting}>
+                <Text style={{fontSize:18,fontWeight:'bold'}}>Phone number</Text>
+                    <View style={{alignItems:'flex-start',width:'60%'}}>
+                        <Text style={{fontSize:16,}}>{person.phonenumber}</Text>
+                    </View>
+            </View>
+            <View style={styles.setting}>
+                <Text style={{fontSize:18,fontWeight:'bold'}}>About</Text>
                 <View style={{alignItems:'flex-start',width:'60%'}}>
                     <Text style={{fontSize:16,}}>{person.about}</Text>
                 </View>
-             </View>
-             <View style={styles.setting}>
-             </View>
-           </View>
-       </SafeAreaView>
+            </View>
+                <View style={styles.setting}>
+                </View>
+        </View>
+</SafeAreaView>
    )
 }
 const styles = StyleSheet.create({
@@ -125,4 +124,4 @@ const styles = StyleSheet.create({
         flex:2,
     },
 })
-export default ProfileDetails;
+export default EditProfile;
