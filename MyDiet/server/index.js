@@ -33,7 +33,14 @@ export const userLogin = async (username, password, onResponse) => {
   }
 };
 
-export const userSignup = async (username, password, onResponse) => {
+export const userSignup = async (
+  username,
+  fullname,
+  email,
+  phone,
+  password,
+  onResponse
+) => {
   const endpoint = `${DB_ENDPOINT}/user/signup`;
   try {
     const response = await fetch(endpoint, {
@@ -43,6 +50,9 @@ export const userSignup = async (username, password, onResponse) => {
       },
       body: JSON.stringify({
         username,
+        fullname,
+        email,
+        phoneNumber: phone,
         password,
       }),
     });

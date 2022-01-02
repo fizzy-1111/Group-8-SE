@@ -1,4 +1,5 @@
-import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   Text,
@@ -9,6 +10,7 @@ import {
   TextInput,
   Image,
   ScrollView,
+  Alert,
 } from "react-native";
 import { Colors, icons } from "../constants";
 import { userSignup } from "../server";
@@ -20,26 +22,34 @@ const B = (props) => (
 const onChangeText = () => {};
 const onPress = () => {};
 const SignUp = () => {
-  const onCreateAccount = () => {};
+  const [username, setUsername] = useState("");
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigation = useNavigation();
+  const onCreateAccount = () => {
+    if (password !== confirmPassword) {
+      Alert.alert("Password do not match");
+      return;
+    }
+    userSignup(username, fullname, email, phone, password, (response) => {
+      Alert.alert(response.message);
+      if (response.status == 1) {
+        navigation.goBack();
+      }
+    });
+  };
   return (
     <SafeAreaView style={styles.container}>
-       <View style={styles.safeview}>
-        <Text style={styles.textStyle}>
-          <B>Create Accout</B>
-        </Text>
-
-        <Text style={styles.textStyle2}>Create a new account</Text>
-        </View>
-        <ScrollView 
-         horizontal={true}
-         pagingEnabled={true}
-         contentContainerStyle={styles.scroll}>
-        <View  style={styles.Tinput}>
+      <ScrollView pagingEnabled={true} contentContainerStyle={styles.scroll}>
+        <View style={styles.Tinput}>
           <View style={styles.input}>
             <Image style={styles.icon1} source={icons.human} />
             <TextInput
               style={styles.Tinput}
-              onChangeText={onChangeText}
+              onChangeText={setUsername}
               placeholder="Username"
               placeholderStyle
             />
@@ -48,35 +58,35 @@ const SignUp = () => {
             <Image style={styles.icon1} source={icons.human} />
             <TextInput
               style={styles.Tinput}
-              onChangeText={onChangeText}
-              placeholder="Nickname"
+              onChangeText={setFullname}
+              placeholder="Full name"
             />
           </View>
-          </View>
-        <View  style={styles.Tinput}>
+        </View>
+        <View style={styles.Tinput}>
           <View style={styles.input}>
             <Image style={styles.icon1} source={icons.email} />
             <TextInput
               style={styles.Tinput}
-              onChangeText={onChangeText}
+              onChangeText={setEmail}
               placeholder="Email"
             />
           </View>
           <View style={styles.input}>
-          <Image style={styles.icon1} source={icons.phone} />
-          <TextInput
-            style={styles.Tinput}
-            onChangeText={onChangeText}
-            placeholder="Phone"
-          />
+            <Image style={styles.icon1} source={icons.phone} />
+            <TextInput
+              style={styles.Tinput}
+              onChangeText={setPhone}
+              placeholder="Phone"
+            />
           </View>
         </View>
-        <View  style={styles.Tinput}>
+        <View style={styles.Tinput}>
           <View style={styles.input}>
             <Image style={styles.icon2} source={icons.lock} />
             <TextInput
               style={styles.Tinput}
-              onChangeText={onChangeText}
+              onChangeText={setPassword}
               placeholder="Password"
             />
           </View>
@@ -84,16 +94,16 @@ const SignUp = () => {
             <Image style={styles.icon2} source={icons.lock} />
             <TextInput
               style={styles.Tinput}
-              onChangeText={onChangeText}
+              onChangeText={setConfirmPassword}
               placeholder="Confirm password"
             />
           </View>
         </View>
-        </ScrollView>
-        <View  style={styles.safeview} >
+      </ScrollView>
+      <View style={styles.safeview}>
         <TouchableOpacity style={styles.button} onPress={onCreateAccount}>
           <Text style={styles.textStyle3}>
-            <B>Next</B>
+            <B>Sign up</B>
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button2} onPress={onPress}>
@@ -106,8 +116,7 @@ const SignUp = () => {
             <B>Sign in as Guest</B>
           </Text>
         </TouchableOpacity>
-        </View>
-      
+      </View>
     </SafeAreaView>
   );
 };
@@ -116,16 +125,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     height: windowHeight,
     width: windowWidth,
-    flex:1,
-    flexDirection:'column',
-    
+    flex: 1,
+    flexDirection: "column",
   },
   safeview: {
     alignItems: "center",
     flexDirection: "column",
-    justifyContent:'center',
+    justifyContent: "center",
     flex: 1.5,
-    
   },
   textStyle: {
     marginTop: 20,
@@ -140,17 +147,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
     backgroundColor: Colors.whiteColor,
     borderRadius: 8,
-    width: windowWidth*9/10,
+    width: (windowWidth * 9) / 10,
     height: 50,
     flexDirection: "row",
   },
   Tinput: {
     marginVertical: 8,
-    alignItems:'center',
-    justifyContent:'center',
-   
-    width:windowWidth,
-    
+    alignItems: "center",
+    justifyContent: "center",
+
+    width: windowWidth,
   },
   icon2: {
     width: 26,
@@ -168,47 +174,45 @@ const styles = StyleSheet.create({
     width: (windowWidth * 9) / 10,
     height: 50,
     alignItems: "center",
-    justifyContent:'center',
+    justifyContent: "center",
     backgroundColor: Colors.iconColor,
     borderRadius: 8,
 
-    flex:1,
+    flex: 1,
   },
   button2: {
     width: (windowWidth * 9) / 10,
     height: 50,
     alignItems: "center",
-    justifyContent:'center',
+    justifyContent: "center",
     backgroundColor: Colors.whiteColor,
     borderRadius: 8,
     marginTop: 15,
-    flex:1
+    flex: 1,
   },
   button3: {
     width: (windowWidth * 7) / 10,
     height: 30,
     alignItems: "center",
-    justifyContent:'center',
+    justifyContent: "center",
     borderRadius: 8,
     marginTop: 10,
-    flex:1
+    flex: 1,
   },
   textStyle3: {
     fontSize: 18,
     color: Colors.whiteColor,
-   
   },
   textStyle4: {
     fontSize: 18,
     color: Colors.iconColor,
-   
   },
   textStyle5: {
     fontSize: 18,
   },
-  scroll:{
-    
-    alignItems:'center',
+  scroll: {
+    alignItems: "center",
+    height: "60%",
     //backgroundColor:Colors.whiteColor,
   },
 });
