@@ -30,8 +30,8 @@ const Login = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!state) return;
     checkToken(state.token, (response) => {
-      console.log(response);
       if (response.status == 1) {
         dispatch(
           setAccountInformation({ token: state.token, user: response.data })
