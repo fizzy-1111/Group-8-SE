@@ -2692,10 +2692,48 @@
   dependencies:
     "fontfaceobserver" "^2.1.0"
 
+"expo-image-loader@~3.0.0":
+  "integrity" "sha512-r4D+uLCf5vm5A2JIbF1Bc9FjYKrYGSLShbFB1MUvZ4BpSXJPRsprYZ9veUBVzzhh8hr23ahTFjMzp3nC57iREw=="
+  "resolved" "https://registry.npmjs.org/expo-image-loader/-/expo-image-loader-3.0.0.tgz"
+  "version" "3.0.0"
+
+"expo-image-manipulator@~10.1.2":
+  "integrity" "sha512-biMGVL7kzCVFIUpNVVf8FHcPzKPHK8RPooe8R9mjBIPV+FimVF6mIBdtTGe9Fw7iFm+jyRJONG2lZOrdBEUk+A=="
+  "resolved" "https://registry.npmjs.org/expo-image-manipulator/-/expo-image-manipulator-10.1.2.tgz"
+  "version" "10.1.2"
+  dependencies:
+    "expo-image-loader" "~3.0.0"
+    "expo-modules-core" "~0.4.4"
+
+"expo-image-picker@^12.0.1":
+  "integrity" "sha512-0utJK87zQH9jeOKlK51x/AXg43msef8qY+oib7TR12jVa6uuPmO8TcMgzr1UZ7DIsxlkMRId/cvBWzMu2BnJcg=="
+  "resolved" "https://registry.npmjs.org/expo-image-picker/-/expo-image-picker-12.0.1.tgz"
+  "version" "12.0.1"
+  dependencies:
+    "@expo/config-plugins" "^4.0.2"
+    "uuid" "7.0.2"
+
+"expo-images-picker@^2.2.3":
+  "integrity" "sha512-E3q8ZjT9MYj9MTxDyA6+Qw6FhUEYuS4hqMoXvQJzcgGNA6eO0lnL+aElodvXJ4E3wFSM8YCPxI3jK3dDHDdx6Q=="
+  "resolved" "https://registry.npmjs.org/expo-images-picker/-/expo-images-picker-2.2.3.tgz"
+  "version" "2.2.3"
+  dependencies:
+    "expo-image-manipulator" "~10.1.2"
+    "expo-media-library" "~13.0.3"
+    "styled-components" "^5.3.0"
+
 "expo-keep-awake@~10.0.1":
   "integrity" "sha512-kcBtoDGkm3RRe6BpKDvR7gof/ErajEia38u92pRvNRctdh+p8AFO7GQuiipyg3iMfhcCFVTCIV7h3tuA0g/yDw=="
   "resolved" "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-10.0.1.tgz"
   "version" "10.0.1"
+
+"expo-media-library@~13.0.3":
+  "integrity" "sha512-TCSqp9s8AmygN2SuTddkpO2jVEuqqKkzi7QRiB+Duoq7ZQFL6pGujBEpklQEgp7LqBlO1WOrY+pokOu0oabXdA=="
+  "resolved" "https://registry.npmjs.org/expo-media-library/-/expo-media-library-13.0.3.tgz"
+  "version" "13.0.3"
+  dependencies:
+    "@expo/config-plugins" "^4.0.2"
+    "expo-modules-core" "~0.4.4"
 
 "expo-modules-autolinking@0.5.2":
   "integrity" "sha512-0mh9XpU8smGaZYT/D/lkGoYRw+gwUrUZs/LiHH7Z7vlUS6jhjvM13Vi2PgfdHjMuOgHy9GjqRrIoDsjuzjfnGQ=="
@@ -2707,6 +2745,14 @@
     "fast-glob" "^3.2.5"
     "find-up" "^5.0.0"
     "fs-extra" "^9.1.0"
+
+"expo-modules-core@~0.4.4":
+  "integrity" "sha512-yuwYoEQMZNSysufsYgJVmncpeGopNi8Q3y5Q7MM05PT90Sc5CGqbYwJMYomF7MprTZAxCvayoRBCKgOlzutWog=="
+  "resolved" "https://registry.npmjs.org/expo-modules-core/-/expo-modules-core-0.4.9.tgz"
+  "version" "0.4.9"
+  dependencies:
+    "compare-versions" "^3.4.0"
+    "invariant" "^2.2.4"
 
 "expo-modules-core@0.6.3":
   "integrity" "sha512-VLVQ6mK9rQHdcV+dn2keXsnDGR8OehUHkSAeZ88e5N8j1zjBo/9SI2/R7v3jBj+1Adg/wmVc5vyJzqnj2hlM2w=="
@@ -2721,7 +2767,7 @@
   "resolved" "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.2.0.tgz"
   "version" "1.2.0"
 
-"expo@*", "expo@^44.0.1":
+"expo@*", "expo@^44.0.1", "expo@>=43.0.0":
   "integrity" "sha512-r3UXg8d2ypcK2I8ds5r9WP6luOLKH4tTqtdgOS+rQt3jpMpkF89VRnNB/Ux3GnzxHnxIHcEmTYBmfoI3qA4abg=="
   "resolved" "https://registry.npmjs.org/expo/-/expo-44.0.1.tgz"
   "version" "44.0.1"
@@ -4758,6 +4804,11 @@
     "lodash" "^4.17.21"
     "prop-types" "^15.7.2"
 
+"react-native-image-picker@^4.6.1":
+  "integrity" "sha512-JkxToOgT3FsaiU8I5QCZnUFg87r3jIzlKkWM8/CKRo6ixpW9usP/tnL3nAHb3Vfx3A4iNtV3WdcoCrlmIyoC4Q=="
+  "resolved" "https://registry.npmjs.org/react-native-image-picker/-/react-native-image-picker-4.6.1.tgz"
+  "version" "4.6.1"
+
 "react-native-iphone-x-helper@^1.0.3", "react-native-iphone-x-helper@^1.3.0":
   "integrity" "sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg=="
   "resolved" "https://registry.npmjs.org/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz"
@@ -5530,7 +5581,7 @@
   "resolved" "https://registry.npmjs.org/strip-eof/-/strip-eof-1.0.0.tgz"
   "version" "1.0.0"
 
-"styled-components@^5.3.3", "styled-components@>= 2":
+"styled-components@^5.3.0", "styled-components@^5.3.3", "styled-components@>= 2":
   "integrity" "sha512-++4iHwBM7ZN+x6DtPPWkCI4vdtwumQ+inA/DdAsqYd4SVgUKJie5vXyzotA00ttcFdQkCng7zc6grwlfIfw+lw=="
   "resolved" "https://registry.npmjs.org/styled-components/-/styled-components-5.3.3.tgz"
   "version" "5.3.3"
@@ -5814,6 +5865,11 @@
   "integrity" "sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg=="
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-7.0.3.tgz"
   "version" "7.0.3"
+
+"uuid@7.0.2":
+  "integrity" "sha512-vy9V/+pKG+5ZTYKf+VcphF5Oc6EFiu3W8Nv3P3zIh0EqVI80ZxOzuPfe9EHjkFNvf8+xuTHVeei4Drydlx4zjw=="
+  "resolved" "https://registry.npmjs.org/uuid/-/uuid-7.0.2.tgz"
+  "version" "7.0.2"
 
 "vary@~1.1.2":
   "integrity" "sha1-IpnwLG3tMNSllhsLn3RSShj2NPw="
