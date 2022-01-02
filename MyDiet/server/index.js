@@ -1,4 +1,4 @@
-const DB_ENDPOINT = "192.168.1.3";
+const DB_ENDPOINT = "http://192.168.3.103:8000";
 
 export const checkToken = async (token, onResponse) => {
   try {

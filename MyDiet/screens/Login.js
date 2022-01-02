@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   SafeAreaView,
   Text,
@@ -9,8 +9,12 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  Alert,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { Colors, icons } from "../constants";
+import { setAccountInformation } from "../redux/actions";
+import { checkToken, userLogin } from "../server";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const B = (props) => (
@@ -19,9 +23,33 @@ const B = (props) => (
 const onChangeText = () => {};
 const onPress = () => {};
 const Login = () => {
+  const state = useSelector((state) => state.auth.accountInformation);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!state) return;
+    checkToken(state.token, (response) => {
+      if (response.status == 1) {
+        dispatch(
+          setAccountInformation({ token: state.token, user: response.data })
+        );
+        navigation.replace("Tabs");
+      }
+    });
+  }, []);
   const onRegister = () => {
     navigation.navigate("Sign up");
+  };
+  const onLogin = () => {
+    userLogin(username, password, (response) => {
+      if (response.status == 1) {
+        dispatch(setAccountInformation(response.data));
+        navigation.replace("Tabs");
+      } else Alert.alert(response.message);
+    });
   };
   return (
     <View style={styles.container}>
@@ -34,20 +62,19 @@ const Login = () => {
           <Image style={styles.icon1} source={icons.human} />
           <TextInput
             style={styles.Tinput}
-            onChangeText={onChangeText}
+            onChangeText={setUsername}
             placeholder="Username"
-            placeholderStyle
           />
         </SafeAreaView>
         <SafeAreaView style={styles.input}>
           <Image style={styles.icon2} source={icons.lock} />
           <TextInput
             style={styles.Tinput}
-            onChangeText={onChangeText}
+            onChangeText={setPassword}
             placeholder="Password"
           />
         </SafeAreaView>
-        <TouchableOpacity style={styles.button} onPress={onPress}>
+        <TouchableOpacity style={styles.button} onPress={onLogin}>
           <Text style={styles.textStyle3}>
             <B>Login</B>
           </Text>
