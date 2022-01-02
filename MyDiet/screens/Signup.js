@@ -93,7 +93,7 @@ const SignUp = () => {
         <View  style={styles.safeview} >
         <TouchableOpacity style={styles.button} onPress={onCreateAccount}>
           <Text style={styles.textStyle3}>
-            <B>Create Account</B>
+            <B>Next</B>
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button2} onPress={onPress}>
