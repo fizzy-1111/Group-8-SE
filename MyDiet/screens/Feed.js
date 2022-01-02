@@ -11,21 +11,25 @@ import {
   Dimensions,
   StyleSheet,
   FlatList,
+  KeyboardAvoidingView,
+  View as Container
 } from "react-native";
 import { Colors, icons, images } from "../constants";
 import styled from "styled-components/native";
 import BottomSheet from "reanimated-bottom-sheet";
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Animated from "react-native-reanimated";
+import { ScrollView } from "react-native-gesture-handler";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-const Container = styled.TouchableWithoutFeedback``;
+const { wheight } = Dimensions.get('window')
+const Contain = styled.TouchableWithoutFeedback``;
 const B = (props) => (
   <Text style={{ fontWeight: "bold" }}>{props.children}</Text>
 );
 var commentData = [];
 
-const listTab = [
+var listTab = [
   {
     status: "Private feed",
   },
@@ -33,7 +37,7 @@ const listTab = [
     status: "Public feed",
   },
 ];
-const Privatedata = [
+var Privatedata = [
   {
     name: "HL",
     date: "08:00 pm, 20/11/2021",
@@ -41,7 +45,7 @@ const Privatedata = [
     status: "Two bananas after 4.0 km running. Feeling happy! ^^",
     imagepost: images.foodImage,
     likenum: 7,
-    key: "1",
+    key: 1,
     comment: [
       {
         username: "Phat",
@@ -66,7 +70,7 @@ const Privatedata = [
     status: "Food for a better heart.",
     imagepost: images.foodImage1,
     likenum: 8,
-    key: "2",
+    key: 2,
     comment: [
         {
           username: "Linh",
@@ -84,8 +88,17 @@ const Privatedata = [
         },
       ],
   },
+  {
+    name: "Tuyen",
+    date: "01:01 pm, 2/11/2022",
+    imagesource: images.imageprofile,
+    status: "Food for a better heart.",
+    imagepost: images.healthy,
+    likenum: 12,
+    key: 3,
+  },
 ];
-const Publicdata = [
+var Publicdata = [
   {
     name: "HL2",
     date: "09:01 pm, 20/11/2021",
@@ -93,35 +106,27 @@ const Publicdata = [
     status: "Food for a better heart.",
     imagepost: images.foodImage1,
     likenum: 8,
-    key: "1",
+    key: 1,
   },
 ];
-const renderContent = () => {
-  return (
-    <View
+const renderContent = (onSend,text,setText) => {
+    return (
+    <SafeAreaView
       style={{
         backgroundColor: Colors.primary,
         height: windowHeight,
         width: windowWidth,
         paddingHorizontal: 10,
-      }}
+      }}zz
     >
-      <SafeAreaView
-        style={{
-          alignItems: "center",
-          flexDirection: "column",
-          justifyContent: "center",
-          marginTop: 40,
-        }}
-      ></SafeAreaView>
-      <SafeAreaView
+      <View
         style={{
           alignItems: "center",
           flexDirection: "column",
           justifyContent: "center",
           backgroundColor: Colors.whiteColor,
           height: windowHeight - 170,
-          marginTop: 20,
+          marginTop: 50,
         }}
       >
         <FlatList
@@ -129,8 +134,36 @@ const renderContent = () => {
           renderItem={renderCommentItem}
           style={styles.flatlist}
         />
-      </SafeAreaView>
-    </View>
+         <View style={{
+                justifyContent: 'space-between',
+                flexDirection:'row',
+                alignItems:'center',
+                height:50,
+                borderRadius:10,
+                borderWidth:2,
+                width:'100%'
+            }}>
+              <KeyboardAvoidingView
+                  behavior={'height'}
+                >
+                <TextInput 
+                  onChangeText={text=>setText(text)}
+                  placeholder="Comment" 
+                  multiline={true} 
+                  style={styles.textStyle} />
+               </KeyboardAvoidingView>
+            <Contain
+                onPress={() => {
+                  onSend(text);
+                }}
+            >
+              <Image source={icons.send}  />
+             </Contain>
+        </View>
+        
+        </View>
+    </SafeAreaView>
+
   );
 };
 const renderCommentItem = ({ item, id }) => {
@@ -146,13 +179,14 @@ const renderCommentItem = ({ item, id }) => {
     </SafeAreaView>
   );
 };
-const renderItem = ({ item, id }, sheetref, onPress) => {
+const renderItem = ({ item, id }, sheetref, onPress,setPosFilter) => {
   fall = new Animated.Value(1);
-
+  image = Image.resolveAssetSource(item.imagepost)
+  
   return (
     <SafeAreaView style={styles.post}>
       <SafeAreaView style={styles.headBar}>
-        <Image source={item.imagesource} />
+      <Image source={item.imagesource} style={{width:50,height:50,borderRadius:100}}/>
         <View style={styles.infoview}>
           <Text style={styles.textTab}>
             <B>{item.name}</B>
@@ -162,20 +196,27 @@ const renderItem = ({ item, id }, sheetref, onPress) => {
       </SafeAreaView>
       <View style={styles.midpost}>
         <Text style={styles.textTab}>{item.status}</Text>
-        <Image source={item.imagepost} style={styles.imageCheck} />
+        <Image source={item.imagepost} 
+        style={{
+          marginTop: 10,
+          borderRadius:10,
+          width: '100%',
+          height: undefined,
+          aspectRatio: image.width/image.height,
+        }} />
       </View>
       <View style={styles.botpost}>
-        <Image source={icons.favorite} style={styles.imageCheck} />
+        <Image source={icons.favorite} style={{marginTop:5}}  />
         <Text style={styles.likeTab}>
           <B>Like {item.likenum}</B>
         </Text>
-        <Container
+        <Contain
           onPress={() => {
-            onPress(item, sheetref);
+            onPress(item, sheetref);setPosFilter(item.key);
           }}
         >
-          <Image source={icons.comment} style={styles.imageCheck} />
-        </Container>
+          <Image source={icons.comment}  style={{marginTop:5}} />
+        </Contain>
       </View>
     </SafeAreaView>
   );
@@ -187,9 +228,14 @@ const getStatus = (status) => {
 
 const Feed = () => {
   const [status, setStatus] = useState("Private feed");
+  const [post, setpost]=useState(0)
   const [trash, setTrash] = useState(true);
+  const [text, setText] = useState('');
   const setStatusFilter = (status) => {
     setStatus(status);
+  };
+  const setPosFilter = (post) => {
+    setpost(post);
   };
   const sheetRef = React.createRef();
   fall = new Animated.Value(1);
@@ -197,6 +243,16 @@ const Feed = () => {
     commentData = item?.comment;
     sheetref?.current?.snapTo(0);
     setTrash(!trash);
+    
+  };
+  const onSend=(text)=>{
+    console.log(text);
+    let comment = {username:"Tuyen Ganh Team",imagesource: images.imageprofile,
+    data: "08:00 pm, 20/11/2021",
+    cm: text,
+    id: "4",};
+    getStatus(status)[post-1].comment.push(comment);
+    commentData = getStatus(status)[post-1]?.comment;
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -211,29 +267,33 @@ const Feed = () => {
         ))}
       </SafeAreaView>
       <SafeAreaView style={styles.headBar}>
-        <Container onPress={() => {}}>
+        <Contain onPress={() => {}}>
           <Image source={icons.addButton} style={styles.iconStyle} />
-        </Container>
+        </Contain>
+        
         <View style={styles.borderView}>
+            <KeyboardAvoidingView
+                  behavior={'padding'}
+                >
           <TextInput placeholder="Search here.." style={styles.textStyle} />
+           </KeyboardAvoidingView>
           <Image source={icons.search} style={styles.iconStyle} />
         </View>
       </SafeAreaView>
       <FlatList
         data={getStatus(status)}
-        renderItem={(item) => renderItem(item, sheetRef, onPress)}
+        renderItem={(item) => renderItem(item, sheetRef, onPress,setPosFilter)}
         style={styles.flatlist}
       >
         {renderContent}
-      </FlatList>
-      {
-        <BottomSheet
-          ref={sheetRef}
-          snapPoints={[windowHeight, 0, 0]}
-          initialSnap={1}
-          renderContent={renderContent}
-          borderRadius={10}
-        />
+      </FlatList>{
+            <BottomSheet
+              ref={sheetRef}
+              snapPoints={[windowHeight,0, 0]}
+              initialSnap={1}
+              renderContent={()=>renderContent(onSend,text,setText)}
+              borderRadius={10}
+            />
       }
     </SafeAreaView>
   );
@@ -241,13 +301,13 @@ const Feed = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+    height:wheight,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: Colors.primary,
   },
   headBar: {
-    marginTop:15,
+
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
@@ -292,6 +352,10 @@ const styles = StyleSheet.create({
   },
   imageCheck: {
     marginTop: 10,
+    borderRadius:10,
+    width: '100%',
+    height: undefined,
+    aspectRatio: 1,
   },
   midpost: {
     justifyContent: "center",
@@ -313,6 +377,7 @@ const styles = StyleSheet.create({
     padding: 15,
     flexDirection: "row",
     marginTop: 20,
+    justifyContent: "center",
   },
   btnTab: {
     width: Dimensions.get("window").width / 3.5,
@@ -321,6 +386,7 @@ const styles = StyleSheet.create({
     borderColor: "#EBEBEB",
     padding: 10,
     justifyContent: "center",
+    height:45
   },
   textTab: {
     fontSize: 16,
@@ -336,6 +402,7 @@ const styles = StyleSheet.create({
   btnTabActive: {
     backgroundColor: Colors.secondary,
     borderRadius: 8,
+    justifyContent:'center'
   },
 });
 export default Feed;

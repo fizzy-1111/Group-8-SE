@@ -16,6 +16,7 @@ export const dietian=require("../assets/icons/dietian.jpg");
 export const expandright=require("../assets/icons/expandright.png");
 export const backbutton=require("../assets/icons/backbutton.png");
 export const edit=require("../assets/icons/edit.png");
+export const send=require("../assets/icons/send.png");
 export default {
     feed,
     checklist,
@@ -35,5 +36,5 @@ export default {
     expandright,
     backbutton,
     edit,
-    
+    send,
 }
