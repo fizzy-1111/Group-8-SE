@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  ScrollView,
 } from "react-native";
 import { Colors, icons } from "../constants";
 import { userSignup } from "../server";
@@ -21,29 +22,75 @@ const onPress = () => {};
 const SignUp = () => {
   const onCreateAccount = () => {};
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.safeview}>
+    <SafeAreaView style={styles.container}>
+       <View style={styles.safeview}>
         <Text style={styles.textStyle}>
           <B>Create Accout</B>
         </Text>
+
         <Text style={styles.textStyle2}>Create a new account</Text>
-        <SafeAreaView style={styles.input}>
-          <Image style={styles.icon1} source={icons.human} />
+        </View>
+        <ScrollView 
+         horizontal={true}
+         pagingEnabled={true}
+         contentContainerStyle={styles.scroll}>
+        <View  style={styles.Tinput}>
+          <View style={styles.input}>
+            <Image style={styles.icon1} source={icons.human} />
+            <TextInput
+              style={styles.Tinput}
+              onChangeText={onChangeText}
+              placeholder="Username"
+              placeholderStyle
+            />
+          </View>
+          <View style={styles.input}>
+            <Image style={styles.icon1} source={icons.human} />
+            <TextInput
+              style={styles.Tinput}
+              onChangeText={onChangeText}
+              placeholder="Nickname"
+            />
+          </View>
+          </View>
+        <View  style={styles.Tinput}>
+          <View style={styles.input}>
+            <Image style={styles.icon1} source={icons.email} />
+            <TextInput
+              style={styles.Tinput}
+              onChangeText={onChangeText}
+              placeholder="Email"
+            />
+          </View>
+          <View style={styles.input}>
+          <Image style={styles.icon1} source={icons.phone} />
           <TextInput
             style={styles.Tinput}
             onChangeText={onChangeText}
-            placeholder="Username"
-            placeholderStyle
+            placeholder="Phone"
           />
-        </SafeAreaView>
-        <SafeAreaView style={styles.input}>
-          <Image style={styles.icon1} source={icons.human} />
-          <TextInput
-            style={styles.Tinput}
-            onChangeText={onChangeText}
-            placeholder="Nickname"
-          />
-        </SafeAreaView>
+          </View>
+        </View>
+        <View  style={styles.Tinput}>
+          <View style={styles.input}>
+            <Image style={styles.icon2} source={icons.lock} />
+            <TextInput
+              style={styles.Tinput}
+              onChangeText={onChangeText}
+              placeholder="Password"
+            />
+          </View>
+          <View style={styles.input}>
+            <Image style={styles.icon2} source={icons.lock} />
+            <TextInput
+              style={styles.Tinput}
+              onChangeText={onChangeText}
+              placeholder="Confirm password"
+            />
+          </View>
+        </View>
+        </ScrollView>
+        <View  style={styles.safeview} >
         <TouchableOpacity style={styles.button} onPress={onCreateAccount}>
           <Text style={styles.textStyle3}>
             <B>Next</B>
@@ -59,8 +106,9 @@ const SignUp = () => {
             <B>Sign in as Guest</B>
           </Text>
         </TouchableOpacity>
-      </SafeAreaView>
-    </View>
+        </View>
+      
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
@@ -68,13 +116,16 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     height: windowHeight,
     width: windowWidth,
+    flex:1,
+    flexDirection:'column',
+    
   },
   safeview: {
     alignItems: "center",
     flexDirection: "column",
-    marginTop: 30,
-    marginBottom: 30,
-    flex: 1,
+    justifyContent:'center',
+    flex: 1.5,
+    
   },
   textStyle: {
     marginTop: 20,
@@ -89,14 +140,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
     backgroundColor: Colors.whiteColor,
     borderRadius: 8,
-    width: (windowWidth * 9) / 10,
+    width: windowWidth*9/10,
     height: 50,
     flexDirection: "row",
   },
   Tinput: {
     marginVertical: 8,
-    marginHorizontal: 10,
-    fontSize: 18,
+    alignItems:'center',
+    justifyContent:'center',
+   
+    width:windowWidth,
+    
   },
   icon2: {
     width: 26,
@@ -114,37 +168,48 @@ const styles = StyleSheet.create({
     width: (windowWidth * 9) / 10,
     height: 50,
     alignItems: "center",
+    justifyContent:'center',
     backgroundColor: Colors.iconColor,
     borderRadius: 8,
-    marginTop: 130,
+
+    flex:1,
   },
   button2: {
     width: (windowWidth * 9) / 10,
     height: 50,
     alignItems: "center",
+    justifyContent:'center',
     backgroundColor: Colors.whiteColor,
     borderRadius: 8,
     marginTop: 15,
+    flex:1
   },
   button3: {
     width: (windowWidth * 7) / 10,
     height: 30,
     alignItems: "center",
+    justifyContent:'center',
     borderRadius: 8,
     marginTop: 10,
+    flex:1
   },
   textStyle3: {
     fontSize: 18,
     color: Colors.whiteColor,
-    marginVertical: 9,
+   
   },
   textStyle4: {
     fontSize: 18,
     color: Colors.iconColor,
-    marginVertical: 9,
+   
   },
   textStyle5: {
     fontSize: 18,
+  },
+  scroll:{
+    
+    alignItems:'center',
+    //backgroundColor:Colors.whiteColor,
   },
 });
 export default SignUp;

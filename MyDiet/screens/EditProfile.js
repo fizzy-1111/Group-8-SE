@@ -116,7 +116,7 @@ const EditProfile=({navigation}) => {
             <View style={styles.setting}>
             </View>
         </View>
-</SafeAreaView>
+   </SafeAreaView>
    )
 }
 const styles = StyleSheet.create({
