@@ -6,6 +6,7 @@ import {
     Image,
     StyleSheet,
     TextInput,
+    TouchableOpacity
     
 } from 'react-native'
 
@@ -34,43 +35,86 @@ const EditProfile=({navigation}) => {
             <Container onPress={()=> {onPressBack({navigation})}}> 
                 <Image source={icons.backbutton}/>
             </Container>
-            <Text style={{fontSize:18}}>Profile Detail</Text>
+            <Text style={{fontSize:18}}>Edit Profile</Text>
             <Container onPress={()=> {onPress()}}> 
-                <Image source={icons.edit}/>
+                <Image />
             </Container>
         </View>
         <View  style={styles.mid}>
          <Image source={getImage()} style={styles.profileImage}/>
+         <View  style={{flexDirection:'column',
+                        alignItems:'flex-start',
+                        width:'100%',
+                        marginHorizontal:50,
+                        marginTop:-20,
+                       }}>
+           <TouchableOpacity
+                        style={styles.button}
+                        onPress={onPress}
+            >
+                <Text style={{fontSize:16,fontWeight:'bold'}}>Upload</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                        style={styles.button}
+                        onPress={onPress}
+            >
+                <Text style={{fontSize:16,fontWeight:'bold'}}>Delete</Text>
+            </TouchableOpacity>
+         </View>
 
         </View>
         <View  style={styles.bot}> 
             <View style={styles.setting}>
                 <Text style={{fontSize:18,fontWeight:'bold'}}>Name</Text>
-                <View style={{alignItems:'flex-start',width:'60%'}}>
-                    <Text style={{fontSize:16,}}>{person.Name}</Text>
+                <View style={{alignItems:'flex-start',
+                                  width:'70%',
+                                  backgroundColor:Colors.whiteColor,
+                                  marginTop:5,
+                                  borderRadius:8}}>
+                    <TextInput style={{fontSize:16,marginHorizontal:5}}>Tuyen</TextInput>
                 </View>
             </View>
             <View style={styles.setting}>
                 <Text style={{fontSize:18,fontWeight:'bold'}}>Email</Text>
-                <View style={{alignItems:'flex-start',width:'60%'}}>
-                    <Text style={{fontSize:16,}}>{person.email}</Text>
+                <View style={{alignItems:'flex-start',
+                                  width:'70%',
+                                  backgroundColor:Colors.whiteColor,
+                                  marginTop:5,
+                                  borderRadius:10}}>
+                <TextInput style={{fontSize:16,marginHorizontal:5}}></TextInput>
                 </View>
                 
             </View>
             <View style={styles.setting}>
                 <Text style={{fontSize:18,fontWeight:'bold'}}>Phone number</Text>
-                    <View style={{alignItems:'flex-start',width:'60%'}}>
-                        <Text style={{fontSize:16,}}>{person.phonenumber}</Text>
+                    <View style={{alignItems:'flex-start',
+                                  width:'70%',
+                                  backgroundColor:Colors.whiteColor,
+                                  marginTop:5,
+                                  borderRadius:10}}>
+                    <TextInput style={{fontSize:16,marginHorizontal:5}}></TextInput>
                     </View>
             </View>
             <View style={styles.setting}>
                 <Text style={{fontSize:18,fontWeight:'bold'}}>About</Text>
-                <View style={{alignItems:'flex-start',width:'60%'}}>
-                    <Text style={{fontSize:16,}}>{person.about}</Text>
+                <View style={{alignItems:'flex-start',
+                                  width:'70%',
+                                  backgroundColor:Colors.whiteColor,
+                                  marginTop:5,
+                                  borderRadius:10}}>
+                    <TextInput style={{fontSize:16,marginHorizontal:5}}></TextInput>
                 </View>
             </View>
-                <View style={styles.setting}>
-                </View>
+            <View style={{alignItems:'center',marginTop:20}}>
+            <TouchableOpacity
+                        style={styles.button}
+                        onPress={onPress}
+                    >
+                        <Text style={{fontSize:16,fontWeight:'bold'}}>Save changes</Text>
+            </TouchableOpacity>
+            </View>
+            <View style={styles.setting}>
+            </View>
         </View>
 </SafeAreaView>
    )
@@ -90,12 +134,12 @@ const styles = StyleSheet.create({
         
     },
     mid:{
-        alignItems:'flex-start',
-        justifyContent:'center',
-        flexDirection:'column',
-        marginHorizontal:20,
+        justifyContent: 'space-between',
+        flexDirection:'row',
+        alignItems:'center',
         flex:2,
         marginTop:15,
+        width:'100%',
     },
     bot:{
         justifyContent:'center',
@@ -107,7 +151,8 @@ const styles = StyleSheet.create({
       width:150,
       height:150,
       borderRadius:100,
-      overflow:"hidden"
+      overflow:"hidden",
+      marginHorizontal:20,
     },
     setting:{
         alignItems:'flex-start',
@@ -122,6 +167,17 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         marginHorizontal:15,
         flex:2,
+    },
+    button:{
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:Colors.grayColor,
+        borderRadius: 8,
+        height:50,
+        width:'30%',
+        marginTop:20,
+        //justifyContent: 'flex-end',
+
     },
 })
 export default EditProfile;

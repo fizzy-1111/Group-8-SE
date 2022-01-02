@@ -20,6 +20,7 @@ const HelloWorldApp = () => {
       >
       <Stack.Screen name="Tabs" component={Tabs} /> 
       <Stack.Screen name="Profile Detail" component={ProfileDetails} /> 
+      <Stack.Screen name="Edit Profile" component={EditProfile} /> 
       
       </Stack.Navigator>
     </NavigationContainer> 

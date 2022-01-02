@@ -24,6 +24,9 @@ const onPress = ()=>{
 const onPressBack = ({navigation})=>{
     navigation.navigate("Tabs")
  };
+ const onPressEdit = ({navigation})=>{
+    navigation.navigate("Edit Profile")
+ }
 let person = {Name:"Tuyen Ganh Team",email:"Tuyen@gmail.com",phonenumber:'0973066661',about:'need to gain weight'};
 const ProfileDetails=({navigation}) => {
    return(
@@ -35,8 +38,8 @@ const ProfileDetails=({navigation}) => {
             <Container onPress={()=> {onPressBack({navigation})}}> 
                  <Image source={icons.backbutton}/>
             </Container>
-            <Text style={{fontSize:18}}>Profile Detail</Text>
-            <Container onPress={()=> {onPress()}}> 
+            <Text style={{fontSize:18,fontWeight:'bold'}}>Profile Detail</Text>
+            <Container onPress={()=> {onPressEdit({navigation})}}> 
                  <Image source={icons.edit}/>
             </Container>
            </View>
