@@ -6,6 +6,7 @@ import Login  from "./Login";
 import SignUp from "./Signup";
 import Profile from "./Profile";
 import ProfileDetails from "./ProfileDetails";
+import EditProfile from "./EditProfile";
 export {
     FA,
     Feed,
@@ -15,4 +16,5 @@ export {
     SignUp,
     Profile,
     ProfileDetails,
+    EditProfile,
 }

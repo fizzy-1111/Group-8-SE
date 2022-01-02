@@ -18,7 +18,7 @@ import { Colors, icons, images } from "../constants";
 import styled from "styled-components/native";
 import BottomSheet from "reanimated-bottom-sheet";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import Animated from "react-native-reanimated";
+import Animated, { set } from "react-native-reanimated";
 import { ScrollView } from "react-native-gesture-handler";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -54,13 +54,13 @@ var Privatedata = [
         cm: "Goodjob",
         id: "1",
       },
-      {
-        username: "Tuong",
-        imagesource: images.avatar1,
-        data: "08:00 pm, 20/11/2022",
-        cm: "Thank you",
-        id: "2",
-      },
+      // {
+      //   username: "Tuong",
+      //   imagesource: images.avatar1,
+      //   data: "08:00 pm, 20/11/2022",
+      //   cm: "Thank you",
+      //   id: "2",
+      // },
     ],
   },
   {
@@ -96,6 +96,7 @@ var Privatedata = [
     imagepost: images.healthy,
     likenum: 12,
     key: 3,
+    comment:[]
   },
 ];
 var Publicdata = [
@@ -109,7 +110,7 @@ var Publicdata = [
     key: 1,
   },
 ];
-const renderContent = (onSend,text,setText) => {
+const renderContent = (onSend,text,setText,Data) => {
     return (
     <SafeAreaView
       style={{
@@ -130,7 +131,7 @@ const renderContent = (onSend,text,setText) => {
         }}
       >
         <FlatList
-          data={commentData}
+          data={Data}
           renderItem={renderCommentItem}
           style={styles.flatlist}
         />
@@ -149,12 +150,13 @@ const renderContent = (onSend,text,setText) => {
                 <TextInput 
                   onChangeText={text=>setText(text)}
                   placeholder="Comment" 
+                  value={text}
                   multiline={true} 
                   style={styles.textStyle} />
                </KeyboardAvoidingView>
             <Contain
                 onPress={() => {
-                  onSend(text);
+                  onSend(text);setText('')
                 }}
             >
               <Image source={icons.send}  />
@@ -230,9 +232,11 @@ const Feed = () => {
   const [status, setStatus] = useState("Private feed");
   const [post, setpost]=useState(0)
   const [trash, setTrash] = useState(true);
-  const [text, setText] = useState('');
+  const [Data, setData] = useState([]);
+  const [text,setText]=useState('');
   const setStatusFilter = (status) => {
     setStatus(status);
+    setData(commentData)
   };
   const setPosFilter = (post) => {
     setpost(post);
@@ -240,19 +244,20 @@ const Feed = () => {
   const sheetRef = React.createRef();
   fall = new Animated.Value(1);
   const onPress = (item, sheetref) => {
-    commentData = item?.comment;
-    sheetref?.current?.snapTo(0);
-    setTrash(!trash);
+    setData(item?.comment);
     
+    sheetref?.current?.snapTo(0);
   };
   const onSend=(text)=>{
     console.log(text);
+    setText(text);
     let comment = {username:"Tuyen Ganh Team",imagesource: images.imageprofile,
     data: "08:00 pm, 20/11/2021",
     cm: text,
     id: "4",};
-    getStatus(status)[post-1].comment.push(comment);
-    commentData = getStatus(status)[post-1]?.comment;
+    getStatus(status)[post-1]?.comment?.push(comment);
+    setData(getStatus(status)[post-1].comment);
+    
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -291,7 +296,7 @@ const Feed = () => {
               ref={sheetRef}
               snapPoints={[windowHeight,0, 0]}
               initialSnap={1}
-              renderContent={()=>renderContent(onSend,text,setText)}
+              renderContent={()=>renderContent(onSend,text,setText,Data)}
               borderRadius={10}
             />
       }
@@ -313,6 +318,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: (windowWidth * 9) / 10,
     paddingLeft: 10,
+    marginTop:10
   },
   iconStyle: {
     height: 35,
