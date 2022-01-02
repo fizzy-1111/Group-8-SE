@@ -7,6 +7,7 @@ export const Colors ={
     iconColor2: "#6AD2B9",
     whiteColor: "#FFFFFF",
     blueColor:"#87CEFA",
+    grayColor:"#DBDBDB",
 }
 const AppTheme={Colors};
 export default AppTheme;

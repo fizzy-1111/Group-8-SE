@@ -12,14 +12,17 @@ import {
   StyleSheet,
   FlatList,
   KeyboardAvoidingView,
-  View as Container
+  View as Container,
+  Modal,
+  Animated,
 } from "react-native";
 import { Colors, icons, images } from "../constants";
 import styled from "styled-components/native";
 import BottomSheet from "reanimated-bottom-sheet";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import Animated, { set } from "react-native-reanimated";
 import { ScrollView } from "react-native-gesture-handler";
+import * as ImagePicker from 'expo-image-picker';
+import { set } from "react-native-reanimated";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const { wheight } = Dimensions.get('window')
@@ -77,14 +80,14 @@ var Privatedata = [
           imagesource: images.imageprofile,
           data: "08:00 pm, 20/11/2021",
           cm: "Cai Lin",
-          id: "1",
+          id: 1,
         },
         {
           username: "Tuyen",
           imagesource: images.avatar1,
           data: "08:00 pm, 20/11/2022",
           cm: "T met",
-          id: "2",
+          id: 2,
         },
       ],
   },
@@ -227,13 +230,65 @@ const getStatus = (status) => {
   if (status == "Public feed") return Publicdata;
   else if (status == "Private feed") return Privatedata;
 };
-
+const ModalPoup = ({visible, children}) => {
+  const [showModal, setShowModal] = React.useState(visible);
+  const scaleValue = React.useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    toggleModal();
+  }, [visible]);
+  const toggleModal = () => {
+    if (visible) {
+      setShowModal(true);
+      Animated.spring(scaleValue, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      setTimeout(() => setShowModal(false), 200);
+      Animated.timing(scaleValue, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    }
+  };
+  return (
+    <Modal transparent visible={showModal}>
+      <View style={styles.modalBackGround}>
+        <Animated.View
+          style={[styles.modalContainer, {transform: [{scale: scaleValue}]}]}>
+          {children}
+        </Animated.View>
+      </View>
+    </Modal>
+  );
+};
 const Feed = () => {
   const [status, setStatus] = useState("Private feed");
   const [post, setpost]=useState(0)
   const [trash, setTrash] = useState(true);
   const [Data, setData] = useState([]);
   const [text,setText]=useState('');
+  const [textPost,setTextPost]=useState('');
+  const [visible,setVisible]=useState(false);
+  const [image, setImage] = useState(null);
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
   const setStatusFilter = (status) => {
     setStatus(status);
     setData(commentData)
@@ -241,8 +296,23 @@ const Feed = () => {
   const setPosFilter = (post) => {
     setpost(post);
   };
+  
+  const onAddPost=(textPost)=>{
+    setVisible(false);
+    let newPost={
+      name: "Tuyen Ganh Team",
+      date: "08:00 pm, 20/11/2021",
+      imagesource: images.avatar1,
+      status: textPost,
+      imagepost: images.foodImage,
+      likenum: 7,
+      key: getStatus(status).length+1 ,
+      comment:[]
+    }
+    getStatus(status).push(newPost);
+    setStatus(status)
+  }
   const sheetRef = React.createRef();
-  fall = new Animated.Value(1);
   const onPress = (item, sheetref) => {
     setData(item?.comment);
     
@@ -254,11 +324,16 @@ const Feed = () => {
     let comment = {username:"Tuyen Ganh Team",imagesource: images.imageprofile,
     data: "08:00 pm, 20/11/2021",
     cm: text,
-    id: "4",};
-    getStatus(status)[post-1]?.comment?.push(comment);
-    setData(getStatus(status)[post-1].comment);
+    id: 3,};
+    if(text!=''){
+      getStatus(status)[post-1]?.comment?.push(comment);
+      setData(getStatus(status)[post-1].comment);
+    }
     
   };
+  const exitPost=()=>{
+      setImage(null)
+  }
   return (
     <SafeAreaView style={styles.container}>
       <SafeAreaView style={styles.listTab}>
@@ -272,7 +347,7 @@ const Feed = () => {
         ))}
       </SafeAreaView>
       <SafeAreaView style={styles.headBar}>
-        <Contain onPress={() => {}}>
+        <Contain onPress={()=>setVisible(true)}>
           <Image source={icons.addButton} style={styles.iconStyle} />
         </Contain>
         
@@ -299,7 +374,49 @@ const Feed = () => {
               renderContent={()=>renderContent(onSend,text,setText,Data)}
               borderRadius={10}
             />
+            
       }
+       <ModalPoup visible={visible}>
+        <View style={{alignItems: 'center'}}>
+          
+            <TouchableOpacity onPress={() => {setVisible(false);exitPost()}}>
+              <Text>Exit</Text>
+            </TouchableOpacity>
+        </View>
+        <View style={styles.setting}>
+                <Text style={{fontSize:18,fontWeight:'bold'}}>Your Post</Text>
+                <View style={{alignItems:'flex-start',
+                                  width:'100%',
+                                  height:'50%',
+                                  backgroundColor:Colors.whiteColor,
+                                  marginTop:5,
+                                  borderRadius:8}}>
+                    <TextInput 
+                     onChangeText={textPost=>setTextPost(textPost)} 
+                     multiline={true}  
+                     style={{fontSize:16,marginHorizontal:5,}}>
+
+                     </TextInput>
+                </View>
+            </View>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <TouchableOpacity
+                        style={styles.touch}
+                        onPress={pickImage}
+                    >
+              <Text style={{fontSize:16,fontWeight:'bold',color:Colors.whiteColor}}>Post Image</Text>
+              {image && <Image source={{ uri: image }} style={{  height:100,width:'100%', }} />}
+              </TouchableOpacity>
+          </View>
+            <View style={{alignItems:'center',marginTop:20}}>
+            <TouchableOpacity
+                        style={styles.touch}
+                        onPress={()=>onAddPost(textPost)}
+                    >
+                        <Text style={{fontSize:16,fontWeight:'bold',color:Colors.whiteColor}}>Save changes</Text>
+            </TouchableOpacity>
+            </View>
+      </ModalPoup>
     </SafeAreaView>
   );
 };
@@ -409,6 +526,42 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondary,
     borderRadius: 8,
     justifyContent:'center'
+  },
+  modalBackGround: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    width: '80%',
+    backgroundColor: Colors.grayColor,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    borderRadius: 20,
+    elevation: 20,
+  },
+  header: {
+    width: '100%',
+    height: 40,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+  },
+  setting:{
+    alignItems:'flex-start',
+    justifyContent:'center',
+    flexDirection:'column',
+    marginHorizontal:15,
+   
+  },
+  touch:{
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor:Colors.iconColor,
+    borderRadius: 8,
+    height:50,
+    width:'40%',
+    marginTop:30,
   },
 });
 export default Feed;
