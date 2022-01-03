@@ -144,6 +144,7 @@ const renderItem = ({ item, index }, sheetref, onPress, setPosFilter) => {
             height: 200,
           }}
         />
+
       </View>
       <View style={styles.botpost}>
         <Image source={icons.favorite} style={{ marginTop: 5 }} />
@@ -265,7 +266,9 @@ const Feed = () => {
         }
       }
     );
+    setVisible(false);
   };
+
   const sheetRef = React.createRef();
   const onPress = (item, sheetref) => {
     setData(item?.comment);
@@ -396,6 +399,7 @@ const Feed = () => {
             </Text>
           </TouchableOpacity>
         </View>
+           
       </ModalPoup>
     </SafeAreaView>
   );

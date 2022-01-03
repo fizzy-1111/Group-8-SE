@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { WINDOW_WIDTH } from "@gorhom/bottom-sheet";
+import React, { useState, useEffect, version } from "react";
 import {
   View,
   Text,
@@ -14,6 +15,9 @@ import { useSelector } from "react-redux";
 import { Colors, icons } from "../constants";
 import { searchFood } from "../server";
 const { width, height } = Dimensions.get("window");
+const B = (props) => (
+  <Text style={{ fontWeight: "bold" }}>{props.children}</Text>
+);
 const FA = () => {
   const state = useSelector((state) => state.auth.accountInformation);
   const [search, setSearch] = useState("");
@@ -24,10 +28,11 @@ const FA = () => {
       if (response.status == 1) {
         setData(response.data);
       }
+      
     });
   }, []);
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
+    <SafeAreaView style={{ flex: 1, alignItems: "center",backgroundColor:Colors.primary}}>
       <View style={styles.safeview}>
         <TextInput
           placeholder="Search here.."
@@ -49,7 +54,7 @@ const FA = () => {
       <FlatList
         data={data}
         style={{
-          width: "100%",
+          width:width,
           height: "70%",
           marginVertical: 20,
         }}
@@ -58,19 +63,43 @@ const FA = () => {
             <View
               style={{
                 backgroundColor: "white",
-                width: width * 0.8,
-                height: height * 0.3,
+                width: width*0.9 ,
+                height: height * 0.2,
                 alignSelf: "center",
-                marginBottom: 20,
+                justifyContent:'space-between',
+                flexDirection:'row',
+                marginBottom:20,
+                borderRadius:10,
+          
               }}
             >
-              <Text>
-                Name: {item.name}
-                {"\n"}Fat: {item.fat}
-                {"\n"}Protein: {item.protein}
-                {"\n"}Carbs: {item.carbs}
-              </Text>
-            </View>
+              <View style={{justifyContent:'center', marginHorizontal:10}}>
+              <Image source={{uri:item.image}} style={{width:100,height:100,borderRadius:10}}/>
+              </View>
+              {/* <View style={{justifyContent:'center', marginHorizontal:10}>
+              // <Text style={{marginHorizontal:10}}>
+              // <B>Name</B>: {item.name}
+              //   {"\n"}<B>Fat</B>: {item.fat}
+              //   {"\n"}<B>Protein</B>: {item.protein}
+              //   {"\n"}<B>Carbs</B>: {item.carbs}
+              // </Text>
+              </View> */}
+              <View style={{justifyContent:'center', marginHorizontal:10,alignItems:'flex-start',width:'70%'}}>
+              <Text style={{fontSize:18,marginHorizontal:10,marginBottom:10}}><B>Name</B>: {item.name}   </Text>   
+             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{justifyContent:'center', marginHorizontal:10,alignItems:'flex-start',flexDirection:'column'}}>          
+              <Text><B>Unit</B>: {item.unit}   </Text>            
+              <Text><B>Calories</B>: {item.calories}    </Text>  
+              <Text><B>Fat</B>: {item.fat}</Text>
+              </View>
+              <View style={{justifyContent:'center', marginHorizontal:10,alignItems:'flex-start',flexDirection:'column'}}>
+              <Text> <B>   Carbs</B>: {item.carbs}</Text>
+              <Text> <B>   Protein</B>: {item.protein} </Text>
+              </View>
+
+             </View>
+              </View>
+              </View>
           );
         }}
         keyExtractor={(item) => item._id}
@@ -80,7 +109,7 @@ const FA = () => {
 };
 const styles = StyleSheet.create({
   safeview: {
-    marginTop: 30,
+    marginTop: 50,
     marginHorizontal: 18,
     height: 40,
     backgroundColor: Colors.whiteColor,

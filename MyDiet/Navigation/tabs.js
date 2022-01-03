@@ -25,12 +25,12 @@ const Tabs = () => {
             marginHorizontal: 20,
             height: 60,
             borderRadius: 10,
-            shadowColor: "#000",
-            shadowOpacity: 0.06,
-            shadowOffset: {
-              width: 10,
-              height: 10,
-            },
+            //shadowColor: "#000",
+            // shadowOpacity: 0.06,
+            // shadowOffset: {
+            //   width: 10,
+            //   height: 10,
+            // },
           },
         }}
       >

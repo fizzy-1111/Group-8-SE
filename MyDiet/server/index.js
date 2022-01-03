@@ -1,4 +1,4 @@
-const DB_ENDPOINT = "http://192.168.3.103:8000";
+const DB_ENDPOINT = "http://192.168.1.5:8000";
 import mime from "mime";
 
 export const checkToken = async (token, onResponse) => {
@@ -109,6 +109,7 @@ export const searchFood = async (name, token, onResponse) => {
       },
       body: JSON.stringify({ name }),
     });
+
     const jsonResponse = await response.json();
     onResponse(jsonResponse);
   } catch (error) {
