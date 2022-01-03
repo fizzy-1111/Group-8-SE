@@ -43,7 +43,7 @@ const SignUp = () => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView pagingEnabled={true} contentContainerStyle={styles.scroll}>
+      <View style={{flex:1, justifyContent:'center'}}>
         <View style={styles.Tinput}>
           <View style={styles.input}>
             <Image style={styles.icon1} source={icons.human} />
@@ -99,7 +99,7 @@ const SignUp = () => {
             />
           </View>
         </View>
-      </ScrollView>
+      </View>
       <View style={styles.safeview}>
         <TouchableOpacity style={styles.button} onPress={onCreateAccount}>
           <Text style={styles.textStyle3}>
@@ -132,7 +132,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "column",
     justifyContent: "center",
-    flex: 1.5,
+    width:'100%',
+    height:'20%'
   },
   textStyle: {
     marginTop: 20,

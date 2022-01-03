@@ -206,8 +206,7 @@ const renderItem = ({ item, id }, sheetref, onPress,setPosFilter) => {
           marginTop: 10,
           borderRadius:10,
           width: '100%',
-          height: undefined,
-          aspectRatio: image.width/image.height,
+          
         }} />
       </View>
       <View style={styles.botpost}>
@@ -297,14 +296,14 @@ const Feed = () => {
     setpost(post);
   };
   
-  const onAddPost=(textPost)=>{
+  const onAddPost=(textPost,uri)=>{
     setVisible(false);
     let newPost={
       name: "Tuyen Ganh Team",
-      date: "08:00 pm, 20/11/2021",
+      date: new Date,
       imagesource: images.avatar1,
       status: textPost,
-      imagepost: images.foodImage,
+      imagepost:uri,
       likenum: 7,
       key: getStatus(status).length+1 ,
       comment:[]
@@ -411,7 +410,7 @@ const Feed = () => {
             <View style={{alignItems:'center',marginTop:20}}>
             <TouchableOpacity
                         style={styles.touch}
-                        onPress={()=>onAddPost(textPost)}
+                        onPress={()=>onAddPost(textPost,image)}
                     >
                         <Text style={{fontSize:16,fontWeight:'bold',color:Colors.whiteColor}}>Save changes</Text>
             </TouchableOpacity>
