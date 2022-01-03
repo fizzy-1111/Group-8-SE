@@ -82,17 +82,17 @@ export const uploadAvatar = async (uri, token, callback) => {
     console.log(error);
   }
 };
-export const fetchItemDetail = async (id, token, onResponse) => {
+export const searchFood = async (name, token, onResponse) => {
   try {
     if (!token) throw "Token is null";
 
-    const response = await fetch(`${DB_ENDPOINT}/item/item_info/`, {
+    const response = await fetch(`${DB_ENDPOINT}/food/findfood/`, {
       method: "POST",
       headers: {
         authorization: token,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ itemId: id }),
+      body: JSON.stringify({ name }),
     });
     const jsonResponse = await response.json();
     onResponse(jsonResponse);
