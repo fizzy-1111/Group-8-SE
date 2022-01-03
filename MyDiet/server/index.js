@@ -1,4 +1,5 @@
-const DB_ENDPOINT = "http://192.168.1.5:8000";
+const DB_ENDPOINT = "http://192.168.3.103:8000";
+import mime from "mime";
 
 export const checkToken = async (token, onResponse) => {
   try {
@@ -64,24 +65,38 @@ export const userSignup = async (
   }
 };
 
-export const uploadAvatar = async (uri, token, callback) => {
+export const uploadPostAsync = async (
+  imageUri,
+  content,
+  postType,
+  token,
+  onResponse
+) => {
   try {
     const data = new FormData();
-    data.append("avatar", dataURItoBlob(uri), "avatar" + getFileExtension(uri));
-    const endpoint = `${DB_ENDPOINT}/user/upload_avatar`;
+    data.append("image", {
+      uri: "file:///" + imageUri.split("file:/").join(""),
+      type: mime.getType(imageUri),
+      name: imageUri.split("/").pop(),
+    });
+    data.append("content", content);
+    data.append("postType", postType);
+    const endpoint = `${DB_ENDPOINT}/post/uploadpost`;
     const response = await fetch(endpoint, {
       method: "POST",
       headers: {
         authorization: token,
+        "Content-Type": "multipart/form-data",
       },
       body: data,
     });
     const jsonResponse = await response.json();
-    callback(jsonResponse);
+    onResponse(jsonResponse);
   } catch (error) {
     console.log(error);
   }
 };
+
 export const searchFood = async (name, token, onResponse) => {
   try {
     if (!token) throw "Token is null";
@@ -93,6 +108,27 @@ export const searchFood = async (name, token, onResponse) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name }),
+    });
+    const jsonResponse = await response.json();
+    onResponse(jsonResponse);
+  } catch (error) {
+    // TODO: show error
+    console.log(error);
+    onResponse({ status: 0, message: error });
+  }
+};
+
+export const getPostList = async (cursor, type, token, onResponse) => {
+  try {
+    if (!token) throw "Token is null";
+
+    const response = await fetch(`${DB_ENDPOINT}/post/getpostlist/`, {
+      method: "POST",
+      headers: {
+        authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cursor, type }),
     });
     const jsonResponse = await response.json();
     onResponse(jsonResponse);
