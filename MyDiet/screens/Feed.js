@@ -25,7 +25,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
 import { set } from "react-native-reanimated";
 import { useSelector } from "react-redux";
-import { uploadPostAsync, getPostList } from "../server";
+import { uploadPostAsync, getPostList, commentPost } from "../server";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const { wheight } = Dimensions.get("window");
@@ -69,6 +69,7 @@ const renderContent = (onSend, text, setText, Data) => {
           data={Data}
           renderItem={renderCommentItem}
           style={styles.flatlist}
+          keyExtractor={(item) => item._id}
         />
         <View
           style={{
@@ -111,9 +112,9 @@ const renderCommentItem = ({ item, id }) => {
       />
       <View style={styles.infoview}>
         <Text style={styles.textTab}>
-          <B>{item.username}</B> {item.cm}
+          <B>{item.name}</B> {item.dateTime}
         </Text>
-        <Text style={styles.textTab}>{item.data}</Text>
+        <Text style={styles.textTab}>{item.content}</Text>
       </View>
     </SafeAreaView>
   );
@@ -144,7 +145,6 @@ const renderItem = ({ item, index }, sheetref, onPress, setPosFilter) => {
             height: 200,
           }}
         />
-
       </View>
       <View style={styles.botpost}>
         <Image source={icons.favorite} style={{ marginTop: 5 }} />
@@ -220,6 +220,7 @@ const Feed = () => {
   function fetchData() {
     const currentStatus = status;
     getPostList(cursor, status === "Private feed", state.token, (response) => {
+      if (response.status != 1) return;
       if (currentStatus == "Public feed") Publicdata = response.data.postFeed;
       else if (currentStatus == "Private feed")
         Privatedata = response.data.postFeed;
@@ -258,7 +259,6 @@ const Feed = () => {
       status === "Private feed",
       state.token,
       (response) => {
-        console.log(response);
         if (response.status == 1) {
           Alert.alert("Upload post successfully");
           getStatus(status).push(response.data);
@@ -271,16 +271,22 @@ const Feed = () => {
 
   const sheetRef = React.createRef();
   const onPress = (item, sheetref) => {
-    setData(item?.comment);
-
+    setData(item?.comments);
     sheetref?.current?.snapTo(0);
   };
   const onSend = (text) => {
     if (text != "") {
-      console.log(getStatus(status)[post]);
-      return;
-      getStatus(status)[post - 1]?.comment?.push(comment);
-      setData(getStatus(status)[post - 1].comment);
+      commentPost(
+        getStatus(status)[post]._id,
+        text,
+        state.token,
+        (response) => {
+          if (response.status == 1) {
+            getStatus(status)[post]?.comments?.push(response.data);
+            setTrash(!trash);
+          }
+        }
+      );
     }
   };
   const exitPost = () => {
@@ -399,7 +405,6 @@ const Feed = () => {
             </Text>
           </TouchableOpacity>
         </View>
-           
       </ModalPoup>
     </SafeAreaView>
   );

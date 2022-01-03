@@ -1,4 +1,4 @@
-const DB_ENDPOINT = "http://192.168.1.5:8000";
+const DB_ENDPOINT = "http://192.168.3.103:8000";
 import mime from "mime";
 
 export const checkToken = async (token, onResponse) => {
@@ -130,6 +130,27 @@ export const getPostList = async (cursor, type, token, onResponse) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ cursor, type }),
+    });
+    const jsonResponse = await response.json();
+    onResponse(jsonResponse);
+  } catch (error) {
+    // TODO: show error
+    console.log(error);
+    onResponse({ status: 0, message: error });
+  }
+};
+
+export const commentPost = async (postID, content, token, onResponse) => {
+  try {
+    if (!token) throw "Token is null";
+
+    const response = await fetch(`${DB_ENDPOINT}/post/commentpost/`, {
+      method: "POST",
+      headers: {
+        authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ postID, content }),
     });
     const jsonResponse = await response.json();
     onResponse(jsonResponse);
