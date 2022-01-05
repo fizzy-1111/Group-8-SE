@@ -26,18 +26,16 @@ var data=[
     Name:"Linh Nguyễn",
     Email:"nhl@apcs.vn",
     PhoneNumber:"0987654321",
-    Rating:"4.5/5",
     id:1,
   },
   {
     Name:"Phát Phan",
     Email:"pvp@apcs.vn",
     PhoneNumber:"12234254534",
-    Rating:"4.8/5",
     id:2
   }
 ]
-const DietianList = () => {
+const ClientList = () => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={{ flex: 1,backgroundColor:Colors.primary}}>
@@ -47,7 +45,7 @@ const DietianList = () => {
             <Container onPress={()=>{navigation.navigate("Tabs");}}> 
                 <Image source={icons.backbutton}/>
             </Container>
-            <Text style={{fontSize:18,fontWeight:'bold'}}>Find a Dietian</Text>
+            <Text style={{fontSize:18,fontWeight:'bold'}}>My Client list</Text>
             <Container> 
                 <Image />
             </Container>
@@ -95,19 +93,6 @@ const DietianList = () => {
                             marginHorizontal:10,
                             borderColor:Colors.grayColor,
                             borderWidth:2}}/>
-                         <TouchableOpacity
-                            style={{height:40,
-                                    width:100,
-                                    alignItems:'center',
-                                    justifyContent:'center',
-                                    backgroundColor:Colors.grayColor,
-                                    borderRadius:10,
-                                    marginTop:10,
-                                    }}
-                            onPress={()=>{}}
-                          >
-                         <Text style={{fontSize:16,fontWeight:'bold',color:Colors.iconColor}}>Register</Text>
-            </TouchableOpacity>
                 </View>
               </View>
 
@@ -117,7 +102,6 @@ const DietianList = () => {
               <View style={{justifyContent:'center', marginHorizontal:10,alignItems:'flex-start',flexDirection:'column'}}>          
               <Text><B>Email</B>: {item.Email}   </Text>            
               <Text style={{marginTop:5}}><B>Phone Number</B>: {item.PhoneNumber}    </Text>  
-              <Text style={{marginTop:5}}><B>Rating</B>: {item.Rating}</Text>
               </View>
 
              </View>
@@ -158,7 +142,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     marginHorizontal:22,
     flex:1,
-    marginTop:20, 
+    marginTop:20,    
 },
 });
-export default DietianList;
+export default ClientList;

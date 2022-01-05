@@ -9,6 +9,8 @@ import ProfileDetails from "./ProfileDetails";
 import EditProfile from "./EditProfile";
 import ChangePassword from "./ChangePassword";
 import DietianList from "./DietianList";
+import DietianProfile from "./DietianProfile";
+import ClientList from "./ClientList";
 export {
     FA,
     Feed,
@@ -21,4 +23,6 @@ export {
     EditProfile,
     ChangePassword,
     DietianList,
+    DietianProfile,
+    ClientList,
 }

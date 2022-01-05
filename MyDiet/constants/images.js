@@ -6,6 +6,8 @@ export const foodImage1=require("../assets/images/foodImage1.png");
 export const imageprofile=require("../assets/images/imageprofile.png");
 export const beefsteak1=require("../assets/images/beefsteak.png");
 export const healthy=require("../assets/images/healthy.jpg");
+export const dietian=require("../assets/images/dietian.png")
+export const client=require("../assets/images/client.png")
 export default{
     intro1,
     avatar,
@@ -15,4 +17,6 @@ export default{
     imageprofile,
     beefsteak1,
     healthy,
+    dietian,
+    client,
 }

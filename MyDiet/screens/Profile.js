@@ -14,6 +14,16 @@ const getImage = () => {
 const getUsername = () => {
   return "Hoang Linh";
 };
+var user={
+  Title:"User Account",
+  Link:"My personal dietian",
+  Icon:images.client,
+};
+var dietian={
+  Title:"Dietian Account",
+  Link:"My clients",
+  Icon: images.dietian,
+};
 const onPress = () => {};
 const ModalPoup = ({ visible, children }) => {
   const [showModal, setShowModal] = React.useState(visible);
@@ -65,6 +75,8 @@ const Profile = () => {
   const AlreadyHaveDietian=()=>{
      
     setVisible(true)
+    //navigation.navigate("Dietian Profile")
+    //navigation.navigate("Clien List");
   }
   return (
     <View style={styles.container}>
@@ -73,13 +85,10 @@ const Profile = () => {
           <Container onPress={onExit}>
             <Image source={icons.ExitSign} />
           </Container>
-          <Text style={{ fontSize: 18, fontWeight:'bold' }}>User Account</Text>
+          <Text style={{ fontSize: 18, fontWeight:'bold' }}>{user.Title}</Text>
           <Container
-            onPress={() => {
-              onPress();
-            }}
           >
-            <Image source={icons.Upgrade} />
+            <Image source={user.Icon} style={{width:27,height:30}}/>
           </Container>
         </SafeAreaView>
         <SafeAreaView style={styles.mid}>
@@ -128,7 +137,7 @@ const Profile = () => {
         <SafeAreaView style={styles.setting}>
           <Image source={icons.dietian} style={{ width: 32, height: 32 }} />
           <View style={{ alignItems: "flex-start", width: "60%" }}>
-            <Text style={{ fontSize: 16 }}>My Personal Dietian</Text>
+            <Text style={{ fontSize: 16 }}>{user.Link}</Text>
           </View>
           <Container
             onPress={() => {AlreadyHaveDietian()}}
