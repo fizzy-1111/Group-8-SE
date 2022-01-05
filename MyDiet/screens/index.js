@@ -7,6 +7,8 @@ import SignUp from "./Signup";
 import Profile from "./Profile";
 import ProfileDetails from "./ProfileDetails";
 import EditProfile from "./EditProfile";
+import ChangePassword from "./ChangePassword";
+import DietianList from "./DietianList";
 export {
     FA,
     Feed,
@@ -17,4 +19,6 @@ export {
     Profile,
     ProfileDetails,
     EditProfile,
+    ChangePassword,
+    DietianList,
 }

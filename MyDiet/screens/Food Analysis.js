@@ -74,16 +74,9 @@ const FA = () => {
               }}
             >
               <View style={{justifyContent:'center', marginHorizontal:10}}>
-              <Image source={{uri:item.image}} style={{width:100,height:100,borderRadius:10}}/>
+              <Image source={{uri:item.image}} style={{width:100,height:100,borderRadius:10,borderColor:Colors.grayColor,borderWidth:2}}/>
               </View>
-              {/* <View style={{justifyContent:'center', marginHorizontal:10}>
-              // <Text style={{marginHorizontal:10}}>
-              // <B>Name</B>: {item.name}
-              //   {"\n"}<B>Fat</B>: {item.fat}
-              //   {"\n"}<B>Protein</B>: {item.protein}
-              //   {"\n"}<B>Carbs</B>: {item.carbs}
-              // </Text>
-              </View> */}
+
               <View style={{justifyContent:'center', marginHorizontal:10,alignItems:'flex-start',width:'70%'}}>
               <Text style={{fontSize:18,marginHorizontal:10,marginBottom:10}}><B>Name</B>: {item.name}   </Text>   
              <View style={{flexDirection:'row',justifyContent:'space-between'}}>

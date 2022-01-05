@@ -10,6 +10,8 @@ import {
   ProfileDetails,
   Profile,
   EditProfile,
+  ChangePassword,
+  DietianList,
 } from "./screens";
 import Tabs from "./Navigation/tabs";
 import { userLogin } from "./server";
@@ -34,6 +36,9 @@ const HelloWorldApp = () => {
             <Stack.Screen name="Sign up" component={SignUp} />
             <Stack.Screen name="Tabs" component={Tabs} />
             <Stack.Screen name="Profile Detail" component={ProfileDetails} />
+            <Stack.Screen name="Change Password" component={ChangePassword} />
+            <Stack.Screen name="Edit Profile" component={EditProfile} />
+            <Stack.Screen name="Dietian List" component={DietianList} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

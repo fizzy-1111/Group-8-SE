@@ -10,7 +10,6 @@ import {
   Text,
   Dimensions,
   StyleSheet,
-  FlatList,
   KeyboardAvoidingView,
   View as Container,
   Modal,
@@ -26,6 +25,7 @@ import * as ImagePicker from "expo-image-picker";
 import { set } from "react-native-reanimated";
 import { useSelector } from "react-redux";
 import { uploadPostAsync, getPostList, commentPost } from "../server";
+import { FlatList } from "react-native-gesture-handler";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const { wheight } = Dimensions.get("window");
@@ -65,12 +65,16 @@ const renderContent = (onSend, text, setText, Data) => {
           marginTop: 50,
         }}
       >
+        <View style={{flex:1,height:500}}>
         <FlatList
           data={Data}
           renderItem={renderCommentItem}
-          style={styles.flatlist}
+          
+          keyboardShouldPersistTaps='always'
           keyExtractor={(item) => item._id}
         />
+        </View>
+       
         <View
           style={{
             justifyContent: "space-between",
@@ -120,6 +124,7 @@ const renderCommentItem = ({ item, id }) => {
   );
 };
 const renderItem = ({ item, index }, sheetref, onPress, setPosFilter) => {
+
   return (
     <SafeAreaView style={styles.post}>
       <SafeAreaView style={styles.headBar}>
@@ -129,7 +134,7 @@ const renderItem = ({ item, index }, sheetref, onPress, setPosFilter) => {
         />
         <View style={styles.infoview}>
           <Text style={styles.textTab}>
-            <B>{item.name}</B>
+            <B>{item?.owner?.name}</B>
           </Text>
           <Text style={styles.textTab}>{item.dateTime}</Text>
         </View>
@@ -263,6 +268,7 @@ const Feed = () => {
           Alert.alert("Upload post successfully");
           getStatus(status).push(response.data);
           setStatus(status);
+          setTrash(!trash)
         }
       }
     );
@@ -424,6 +430,7 @@ const styles = StyleSheet.create({
     width: (windowWidth * 9) / 10,
     paddingLeft: 10,
     marginTop: 10,
+    height:70
   },
   iconStyle: {
     height: 35,

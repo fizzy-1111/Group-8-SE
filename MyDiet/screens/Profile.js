@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, SafeAreaView, Image, StyleSheet } from "react-native";
+import { View, Text, SafeAreaView, Image, StyleSheet,TouchableOpacity,TextInput, Animated,Modal } from "react-native";
 
 import { Colors, icons, images } from "../constants";
 import styled from "styled-components/native";
@@ -15,15 +15,57 @@ const getUsername = () => {
   return "Hoang Linh";
 };
 const onPress = () => {};
-
+const ModalPoup = ({ visible, children }) => {
+  const [showModal, setShowModal] = React.useState(visible);
+  const scaleValue = React.useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    toggleModal();
+  }, [visible]);
+  const toggleModal = () => {
+    if (visible) {
+      setShowModal(true);
+      Animated.spring(scaleValue, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      setTimeout(() => setShowModal(false), 200);
+      Animated.timing(scaleValue, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    }
+  };
+  return (
+    <Modal transparent visible={showModal}>
+      <View style={styles.modalBackGround}>
+        <Animated.View
+          style={[
+            styles.modalContainer,
+            { transform: [{ scale: scaleValue }] },
+          ]}
+        >
+          {children}
+        </Animated.View>
+      </View>
+    </Modal>
+  );
+};
 const Profile = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.auth.accountInformation);
   const navigation = useNavigation();
+  const [visible, setVisible] = useState(false);
   const onExit = () => {
     dispatch(setAccountInformation(undefined));
     navigation.replace("Login");
   };
+  const AlreadyHaveDietian=()=>{
+     
+    setVisible(true)
+  }
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.whitesnake}>
@@ -31,7 +73,7 @@ const Profile = () => {
           <Container onPress={onExit}>
             <Image source={icons.ExitSign} />
           </Container>
-          <Text style={{ fontSize: 18 }}>User Account</Text>
+          <Text style={{ fontSize: 18, fontWeight:'bold' }}>User Account</Text>
           <Container
             onPress={() => {
               onPress();
@@ -74,7 +116,7 @@ const Profile = () => {
           </View>
           <Container
             onPress={() => {
-              onPress();
+              navigation.navigate("Change Password");
             }}
           >
             <Image
@@ -89,9 +131,7 @@ const Profile = () => {
             <Text style={{ fontSize: 16 }}>My Personal Dietian</Text>
           </View>
           <Container
-            onPress={() => {
-              onPress();
-            }}
+            onPress={() => {AlreadyHaveDietian()}}
           >
             <Image
               source={icons.expandright}
@@ -101,6 +141,62 @@ const Profile = () => {
         </SafeAreaView>
         <SafeAreaView style={styles.setting}></SafeAreaView>
       </SafeAreaView>
+      <ModalPoup visible={visible}>
+         <View style={{ alignItems: "center",
+                       height:50,width:'100%',
+                       justifyContent:'flex-start',
+                       marginBottom:20,
+                       borderRadius:10, }}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "bold",
+                color: Colors.iconColor,
+                marginHorizontal:10,
+              }}
+            >
+              You haven't been assigned to a personal dietitian. Want to find one? 
+            </Text>
+        </View>
+        <View style={{ alignItems: "center",
+                       backgroundColor:Colors.iconColor,
+                       height:50,width:'100%',
+                       justifyContent:'center',
+                       borderRadius:10, }}>
+          <TouchableOpacity
+             style={{width:'100%',alignItems:'center'}}
+             onPress={()=>{setVisible(false);navigation.navigate("Dietian List")}}
+          >
+            <Text style={{
+                fontSize: 18,
+                fontWeight: "bold",
+                color: Colors.whiteColor,
+              }}>Sure</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ alignItems: "center",
+                       height:30,width:'100%',
+                       justifyContent:'center',
+                       marginTop:20,
+                       borderRadius:10, }}>
+          <TouchableOpacity
+             style={{width:'100%',alignItems:'center'}}
+             onPress={() => {
+              setVisible(false);
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "bold",
+                color: Colors.iconColor,
+              }}
+            >
+              Not yet
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ModalPoup>
     </View>
   );
 };
@@ -155,6 +251,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginHorizontal: 15,
     flex: 2,
+  },
+  modalBackGround: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalContainer: {
+    width: "80%",
+    backgroundColor: Colors.grayColor,
+
+    paddingVertical: 30,
+    borderRadius: 20,
+    elevation: 20,
   },
 });
 export default Profile;

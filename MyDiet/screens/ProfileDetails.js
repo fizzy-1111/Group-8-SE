@@ -4,21 +4,18 @@ import { View, Text, SafeAreaView, Image, StyleSheet } from "react-native";
 import { Colors, icons, images } from "../constants";
 import styled from "styled-components/native";
 import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 const Container = styled.TouchableWithoutFeedback``;
-const onPressBack = ({ navigation }) => {
-  navigation.navigate("Tabs");
-};
-const onPressEdit = ({ navigation }) => {
-  navigation.navigate("Edit Profile");
-};
-const ProfileDetails = ({ navigation }) => {
+
+const ProfileDetails = () => {
   const state = useSelector((state) => state.auth.accountInformation);
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.top}>
         <Container
           onPress={() => {
-            onPressBack({ navigation });
+            navigation.navigate("Tabs");
           }}
         >
           <Image source={icons.backbutton} />
@@ -26,7 +23,7 @@ const ProfileDetails = ({ navigation }) => {
         <Text style={{ fontSize: 18, fontWeight: "bold" }}>Profile Detail</Text>
         <Container
           onPress={() => {
-            onPressEdit({ navigation });
+            navigation.navigate("Edit Profile");
           }}
         >
           <Image source={icons.edit} />

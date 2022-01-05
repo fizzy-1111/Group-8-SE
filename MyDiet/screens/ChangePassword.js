@@ -12,31 +12,29 @@ import {
 
 import { Colors,icons,images } from "../constants";
 import styled from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
 const Container =styled.TouchableWithoutFeedback``;
 const getImage=()=>{
   var img=images.imageprofile
   return img
 }
-const getUsername=()=>{
-    return 'Hoang Linh'
-}
+
 const onPress = ()=>{
 };
-const onPressBack = ({navigation})=>{
-    navigation.navigate("Profile Detail")
- };
-const EditProfile=({navigation}) => {
-   return(
+
+const ChangePassword=() => {
+    const navigation = useNavigation();
+    return(
     <SafeAreaView style={styles.container}>
 
         <View
         style={styles.top}
         >
-            <Container onPress={()=> {onPressBack({navigation})}}> 
+            <Container onPress={()=>{navigation.navigate("Tabs");}}> 
                 <Image source={icons.backbutton}/>
             </Container>
-            <Text style={{fontSize:18,fontWeight:'bold'}}>Edit Profile</Text>
-            <Container onPress={()=> {onPress()}}> 
+            <Text style={{fontSize:18,fontWeight:'bold'}}>Change Password</Text>
+            <Container> 
                 <Image />
             </Container>
         </View>
@@ -48,61 +46,48 @@ const EditProfile=({navigation}) => {
                         marginHorizontal:50,
                         marginTop:-20,
                        }}>
-           <TouchableOpacity
-                        style={styles.button}
-                        onPress={onPress}
-            >
-                <Text style={{fontSize:16,fontWeight:'bold'}}>Upload</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                        style={styles.button}
-                        onPress={onPress}
-            >
-                <Text style={{fontSize:16,fontWeight:'bold'}}>Delete</Text>
-            </TouchableOpacity>
          </View>
 
         </View>
         <View  style={styles.bot}> 
             <View style={styles.setting}>
-                <Text style={{fontSize:18,fontWeight:'bold'}}>Name</Text>
-                <View style={{alignItems:'flex-start',
+                <View style={{alignItems:'center',
                                   width:'70%',
+                                  justifyContent:'space-between',
+                                  flexDirection:'row',
                                   backgroundColor:Colors.whiteColor,
                                   marginTop:5,
+                                  height:50,
                                   borderRadius:8}}>
-                    <TextInput style={{fontSize:16,marginHorizontal:5}}>Tuyen</TextInput>
+                    <Image source={icons.lock} style={{width:25,height:28,marginHorizontal:10}}/>
+                    <TextInput placeholder='Old password' style={{fontSize:18,marginHorizontal:5,flex:1}}></TextInput>
                 </View>
             </View>
             <View style={styles.setting}>
-                <Text style={{fontSize:18,fontWeight:'bold'}}>Email</Text>
-                <View style={{alignItems:'flex-start',
+            <View style={{alignItems:'center',
                                   width:'70%',
+                                  justifyContent:'space-between',
+                                  flexDirection:'row',
                                   backgroundColor:Colors.whiteColor,
                                   marginTop:5,
-                                  borderRadius:10}}>
-                <TextInput style={{fontSize:16,marginHorizontal:5}}></TextInput>
+                                  height:50,
+                                  borderRadius:8}}>
+                    <Image source={icons.lock} style={{width:25,height:28,marginHorizontal:10}}/>
+                    <TextInput placeholder='New password' style={{fontSize:18,marginHorizontal:5,flex:1}}></TextInput>
                 </View>
                 
             </View>
             <View style={styles.setting}>
-                <Text style={{fontSize:18,fontWeight:'bold'}}>Phone number</Text>
-                    <View style={{alignItems:'flex-start',
+                <View style={{alignItems:'center',
                                   width:'70%',
+                                  justifyContent:'space-between',
+                                  flexDirection:'row',
                                   backgroundColor:Colors.whiteColor,
                                   marginTop:5,
-                                  borderRadius:10}}>
-                    <TextInput style={{fontSize:16,marginHorizontal:5}}></TextInput>
-                    </View>
-            </View>
-            <View style={styles.setting}>
-                <Text style={{fontSize:18,fontWeight:'bold'}}>About</Text>
-                <View style={{alignItems:'flex-start',
-                                  width:'70%',
-                                  backgroundColor:Colors.whiteColor,
-                                  marginTop:5,
-                                  borderRadius:10}}>
-                    <TextInput style={{fontSize:16,marginHorizontal:5}}></TextInput>
+                                  height:50,
+                                  borderRadius:8}}>
+                    <Image source={icons.lock} style={{width:25,height:28,marginHorizontal:10}}/>
+                    <TextInput placeholder='Confirm password' style={{fontSize:18,marginHorizontal:5,flex:1}}></TextInput>
                 </View>
             </View>
             <View style={{alignItems:'center',marginTop:20}}>
@@ -180,4 +165,4 @@ const styles = StyleSheet.create({
 
     },
 })
-export default EditProfile;
+export default ChangePassword;
