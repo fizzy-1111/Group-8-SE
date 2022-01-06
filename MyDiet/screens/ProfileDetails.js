@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
   },
   top: {
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
     marginHorizontal: 22,
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
   mid: {
     alignItems: "flex-start",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     flexDirection: "column",
     marginHorizontal: 20,
     flex: 2,

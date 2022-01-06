@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
   },
   top: {
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
     marginHorizontal: 22,
@@ -173,8 +173,8 @@ const styles = StyleSheet.create({
   },
   mid: {
     justifyContent: "space-between",
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "column",
+    alignItems: "flex-start",
     flex: 2,
     marginTop: 15,
     width: "100%",

@@ -1,4 +1,4 @@
-const DB_ENDPOINT = "http://192.168.1.5:8000";
+const DB_ENDPOINT = "https://my-diet-mobile-app.herokuapp.com";
 import mime from "mime";
 
 export const checkToken = async (token, onResponse) => {

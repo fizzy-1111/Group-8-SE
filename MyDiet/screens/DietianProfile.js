@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
   },
   top: {
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
     marginHorizontal: 22,
