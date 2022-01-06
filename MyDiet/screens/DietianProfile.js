@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, SafeAreaView, Image, StyleSheet } from "react-native";
+import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 import { Colors, icons, images } from "../constants";
 import styled from "styled-components/native";
@@ -31,6 +31,9 @@ const DietianProfile = () => {
       </View>
       <View style={styles.mid}>
         <Image source={{ uri: user?.avatar }} style={styles.profileImage} />
+        <TouchableOpacity style={styles.button} onPress={()=>{}}>
+          <Text style={{ fontSize: 16, fontWeight: "bold" }}>Unsubscribe</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.bot}>
         <View style={styles.setting}>
@@ -76,10 +79,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   mid: {
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-    marginHorizontal: 20,
+
     flex: 2,
     marginTop: 15,
   },
@@ -108,6 +111,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginHorizontal: 15,
     flex: 2,
+  },
+  button: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.grayColor,
+    borderRadius: 8,
+    height: 50,
+    width: "30%",
+    marginTop: 20,
+    //justifyContent: 'flex-end',
   },
 });
 export default DietianProfile;
