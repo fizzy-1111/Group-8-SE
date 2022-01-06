@@ -20,7 +20,7 @@ const B = (props) => (
   <Text style={{ fontWeight: "bold" }}>{props.children}</Text>
 );
 const onChangeText = () => {};
-const onPress = () => {};
+
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [fullname, setFullname] = useState("");
@@ -106,16 +106,13 @@ const SignUp = () => {
             <B>Sign up</B>
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button2} onPress={onPress}>
+        <TouchableOpacity style={styles.button2} onPress={()=>{navigation.navigate("Login")}}>
           <Text style={styles.textStyle4}>
             <B> Log In</B>
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button3} onPress={onPress}>
-          <Text style={styles.textStyle5}>
-            <B>Sign in as Guest</B>
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.button3} >
+        </View>
       </View>
     </SafeAreaView>
   );

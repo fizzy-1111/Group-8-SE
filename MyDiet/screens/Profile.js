@@ -83,6 +83,15 @@ const Profile = () => {
     dispatch(setAccountInformation(undefined));
     navigation.replace("Login");
   };
+  const getuser=()=>{
+    if (state?.user?.userType == 0) {
+       return user
+    } 
+    else 
+    {
+       return dietian
+    }
+  }
   const AlreadyHaveDietian = () => {
     if (state.user.userType == 0) {
       //User and check if dietitant
@@ -95,6 +104,7 @@ const Profile = () => {
       navigation.navigate("Clien List");
     }
   };
+  console.log({ uri: state?.user?.avatar + "?" + Math.random()})
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.whitesnake}>
@@ -102,9 +112,9 @@ const Profile = () => {
           <Container onPress={onExit}>
             <Image source={icons.ExitSign} />
           </Container>
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>{user.Title}</Text>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>{getuser().Title}</Text>
           <Container>
-            <Image source={user.Icon} style={{ width: 27, height: 30 }} />
+            <Image source={getuser().Icon} style={{ width: 27, height: 30 }} />
           </Container>
         </SafeAreaView>
         <SafeAreaView style={styles.mid}>
@@ -153,7 +163,7 @@ const Profile = () => {
         <SafeAreaView style={styles.setting}>
           <Image source={icons.dietian} style={{ width: 32, height: 32 }} />
           <View style={{ alignItems: "flex-start", width: "60%" }}>
-            <Text style={{ fontSize: 16 }}>{user.Link}</Text>
+            <Text style={{ fontSize: 16 }}>{getuser().Link}</Text>
           </View>
           <Container
             onPress={() => {

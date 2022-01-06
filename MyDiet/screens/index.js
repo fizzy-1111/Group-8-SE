@@ -11,6 +11,7 @@ import ChangePassword from "./ChangePassword";
 import DietianList from "./DietianList";
 import DietianProfile from "./DietianProfile";
 import ClientList from "./ClientList";
+import AboutUs from "./AboutUs";
 export {
     FA,
     Feed,
@@ -25,4 +26,5 @@ export {
     DietianList,
     DietianProfile,
     ClientList,
+    AboutUs,
 }

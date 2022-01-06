@@ -8,6 +8,7 @@ export const Colors ={
     whiteColor: "#FFFFFF",
     blueColor:"#87CEFA",
     grayColor:"#DBDBDB",
+    greenColor:"#6AD2B9",
 }
 const AppTheme={Colors};
 export default AppTheme;
