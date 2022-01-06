@@ -1,4 +1,4 @@
-const DB_ENDPOINT = "http://192.168.1.5:8000";
+const DB_ENDPOINT = "http://192.168.3.103:8000";
 import mime from "mime";
 
 export const checkToken = async (token, onResponse) => {
@@ -301,6 +301,38 @@ export const getPT = async (token, onResponse) => {
     if (!token) throw "Token is null";
 
     const response = await fetch(`${DB_ENDPOINT}/user/personal_dietitian/`, {
+      headers: {
+        authorization: token,
+      },
+    });
+    const jsonResponse = await response.json();
+    onResponse(jsonResponse);
+  } catch (error) {
+    onResponse({ status: 0, message: error });
+  }
+};
+
+export const removePT = async (token, onResponse) => {
+  try {
+    if (!token) throw "Token is null";
+
+    const response = await fetch(`${DB_ENDPOINT}/user/unsubscribe/`, {
+      headers: {
+        authorization: token,
+      },
+    });
+    const jsonResponse = await response.json();
+    onResponse(jsonResponse);
+  } catch (error) {
+    onResponse({ status: 0, message: error });
+  }
+};
+
+export const getClientList = async (token, onResponse) => {
+  try {
+    if (!token) throw "Token is null";
+
+    const response = await fetch(`${DB_ENDPOINT}/user/client_list/`, {
       headers: {
         authorization: token,
       },

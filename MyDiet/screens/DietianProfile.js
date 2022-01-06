@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { View, Text, SafeAreaView, Image, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 
 import { Colors, icons, images } from "../constants";
 import styled from "styled-components/native";
 import { useSelector } from "react-redux";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { removePT } from "../server";
 const Container = styled.TouchableWithoutFeedback``;
 
 const DietianProfile = () => {
@@ -31,7 +40,15 @@ const DietianProfile = () => {
       </View>
       <View style={styles.mid}>
         <Image source={{ uri: user?.avatar }} style={styles.profileImage} />
-        <TouchableOpacity style={styles.button} onPress={()=>{}}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            removePT(state.token, (response) => {
+              Alert.alert(response.message);
+              if (response.status == 1) navigation.goBack();
+            });
+          }}
+        >
           <Text style={{ fontSize: 16, fontWeight: "bold" }}>Unsubscribe</Text>
         </TouchableOpacity>
       </View>
