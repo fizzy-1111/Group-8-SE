@@ -1,4 +1,4 @@
-const DB_ENDPOINT = "http://192.168.1.5:8000";
+const DB_ENDPOINT = "http://192.168.3.103:8000";
 import mime from "mime";
 
 export const checkToken = async (token, onResponse) => {
@@ -97,6 +97,30 @@ export const uploadPostAsync = async (
   }
 };
 
+export const uploadAvatar = async (imageUri, token, onResponse) => {
+  try {
+    const data = new FormData();
+    data.append("avatar", {
+      uri: "file:///" + imageUri.split("file:/").join(""),
+      type: mime.getType(imageUri),
+      name: imageUri.split("/").pop(),
+    });
+    const endpoint = `${DB_ENDPOINT}/user/upload_avatar/`;
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        authorization: token,
+        "Content-Type": "multipart/form-data",
+      },
+      body: data,
+    });
+    const jsonResponse = await response.json();
+    onResponse(jsonResponse);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const searchFood = async (name, token, onResponse) => {
   try {
     if (!token) throw "Token is null";
@@ -157,6 +181,117 @@ export const commentPost = async (postID, content, token, onResponse) => {
   } catch (error) {
     // TODO: show error
     console.log(error);
+    onResponse({ status: 0, message: error });
+  }
+};
+
+export const findDietitian = async (name, token, onResponse) => {
+  try {
+    if (!token) throw "Token is null";
+
+    const response = await fetch(`${DB_ENDPOINT}/user/find_dietitian/`, {
+      method: "POST",
+      headers: {
+        authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name }),
+    });
+    const jsonResponse = await response.json();
+    onResponse(jsonResponse);
+  } catch (error) {
+    // TODO: show error
+    console.log(error);
+    onResponse({ status: 0, message: error });
+  }
+};
+
+export const getDietiant = async (token, onResponse) => {
+  try {
+    if (!token) throw "Token is null";
+
+    const response = await fetch(`${DB_ENDPOINT}/user/dietitian_list/`, {
+      headers: {
+        authorization: token,
+      },
+    });
+    const jsonResponse = await response.json();
+    onResponse(jsonResponse);
+  } catch (error) {
+    console.log(error);
+    onResponse({ status: 0, message: error });
+  }
+};
+
+export const registerDietitian = async (_id, token, onResponse) => {
+  try {
+    if (!token) throw "Token is null";
+
+    const response = await fetch(`${DB_ENDPOINT}/user/register_dietitian/`, {
+      method: "POST",
+      headers: {
+        authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ _id }),
+    });
+    const jsonResponse = await response.json();
+    onResponse(jsonResponse);
+  } catch (error) {
+    // TODO: show error
+    console.log(error);
+    onResponse({ status: 0, message: error });
+  }
+};
+
+export const changePassword = async (
+  oldPassword,
+  newPassword,
+  token,
+  onResponse
+) => {
+  try {
+    if (!token) throw "Token is null";
+
+    const response = await fetch(`${DB_ENDPOINT}/user/change_password/`, {
+      method: "POST",
+      headers: {
+        authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ oldPassword, newPassword }),
+    });
+    const jsonResponse = await response.json();
+    onResponse(jsonResponse);
+  } catch (error) {
+    // TODO: show error
+    console.log(error);
+    onResponse({ status: 0, message: error });
+  }
+};
+
+export const editProfile = async (
+  fullname,
+  email,
+  phoneNumber,
+  about,
+  token,
+  onResponse
+) => {
+  try {
+    if (!token) throw "Token is null";
+
+    const response = await fetch(`${DB_ENDPOINT}/user/update/`, {
+      method: "POST",
+      headers: {
+        authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ fullname, email, phoneNumber, about }),
+    });
+    const jsonResponse = await response.json();
+    onResponse(jsonResponse);
+  } catch (error) {
     onResponse({ status: 0, message: error });
   }
 };

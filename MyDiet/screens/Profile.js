@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, SafeAreaView, Image, StyleSheet,TouchableOpacity,TextInput, Animated,Modal } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  Animated,
+  Modal,
+} from "react-native";
 
 import { Colors, icons, images } from "../constants";
 import styled from "styled-components/native";
@@ -14,14 +24,14 @@ const getImage = () => {
 const getUsername = () => {
   return "Hoang Linh";
 };
-var user={
-  Title:"User Account",
-  Link:"My personal dietian",
-  Icon:images.client,
+var user = {
+  Title: "User Account",
+  Link: "My personal dietian",
+  Icon: images.client,
 };
-var dietian={
-  Title:"Dietian Account",
-  Link:"My clients",
+var dietian = {
+  Title: "Dietian Account",
+  Link: "My clients",
   Icon: images.dietian,
 };
 const onPress = () => {};
@@ -72,12 +82,11 @@ const Profile = () => {
     dispatch(setAccountInformation(undefined));
     navigation.replace("Login");
   };
-  const AlreadyHaveDietian=()=>{
-     
-    setVisible(true)
+  const AlreadyHaveDietian = () => {
+    setVisible(true);
     //navigation.navigate("Dietian Profile")
     //navigation.navigate("Clien List");
-  }
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.whitesnake}>
@@ -85,15 +94,14 @@ const Profile = () => {
           <Container onPress={onExit}>
             <Image source={icons.ExitSign} />
           </Container>
-          <Text style={{ fontSize: 18, fontWeight:'bold' }}>{user.Title}</Text>
-          <Container
-          >
-            <Image source={user.Icon} style={{width:27,height:30}}/>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>{user.Title}</Text>
+          <Container>
+            <Image source={user.Icon} style={{ width: 27, height: 30 }} />
           </Container>
         </SafeAreaView>
         <SafeAreaView style={styles.mid}>
           <Image
-            source={{ uri: state?.user?.avatar }}
+            source={{ uri: state?.user?.avatar + "?" + Math.random() }}
             style={styles.profileImage}
           />
           <Text style={{ fontSize: 24, marginTop: 5, fontWeight: "bold" }}>
@@ -140,7 +148,9 @@ const Profile = () => {
             <Text style={{ fontSize: 16 }}>{user.Link}</Text>
           </View>
           <Container
-            onPress={() => {AlreadyHaveDietian()}}
+            onPress={() => {
+              AlreadyHaveDietian();
+            }}
           >
             <Image
               source={icons.expandright}
@@ -151,46 +161,68 @@ const Profile = () => {
         <SafeAreaView style={styles.setting}></SafeAreaView>
       </SafeAreaView>
       <ModalPoup visible={visible}>
-         <View style={{ alignItems: "center",
-                       height:50,width:'100%',
-                       justifyContent:'flex-start',
-                       marginBottom:20,
-                       borderRadius:10, }}>
+        <View
+          style={{
+            alignItems: "center",
+            height: 50,
+            width: "100%",
+            justifyContent: "flex-start",
+            marginBottom: 20,
+            borderRadius: 10,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              color: Colors.iconColor,
+              marginHorizontal: 10,
+            }}
+          >
+            You haven't been assigned to a personal dietitian. Want to find one?
+          </Text>
+        </View>
+        <View
+          style={{
+            alignItems: "center",
+            backgroundColor: Colors.iconColor,
+            height: 50,
+            width: "100%",
+            justifyContent: "center",
+            borderRadius: 10,
+          }}
+        >
+          <TouchableOpacity
+            style={{ width: "100%", alignItems: "center" }}
+            onPress={() => {
+              setVisible(false);
+              navigation.navigate("Dietian List");
+            }}
+          >
             <Text
               style={{
                 fontSize: 18,
                 fontWeight: "bold",
-                color: Colors.iconColor,
-                marginHorizontal:10,
+                color: Colors.whiteColor,
               }}
             >
-              You haven't been assigned to a personal dietitian. Want to find one? 
+              Sure
             </Text>
-        </View>
-        <View style={{ alignItems: "center",
-                       backgroundColor:Colors.iconColor,
-                       height:50,width:'100%',
-                       justifyContent:'center',
-                       borderRadius:10, }}>
-          <TouchableOpacity
-             style={{width:'100%',alignItems:'center'}}
-             onPress={()=>{setVisible(false);navigation.navigate("Dietian List")}}
-          >
-            <Text style={{
-                fontSize: 18,
-                fontWeight: "bold",
-                color: Colors.whiteColor,
-              }}>Sure</Text>
           </TouchableOpacity>
         </View>
-        <View style={{ alignItems: "center",
-                       height:30,width:'100%',
-                       justifyContent:'center',
-                       marginTop:20,
-                       borderRadius:10, }}>
+        <View
+          style={{
+            alignItems: "center",
+            height: 30,
+            width: "100%",
+            justifyContent: "center",
+            marginTop: 20,
+            borderRadius: 10,
+          }}
+        >
           <TouchableOpacity
-             style={{width:'100%',alignItems:'center'}}
-             onPress={() => {
+            style={{ width: "100%", alignItems: "center" }}
+            onPress={() => {
               setVisible(false);
             }}
           >

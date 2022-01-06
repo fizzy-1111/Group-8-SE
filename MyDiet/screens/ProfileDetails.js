@@ -31,7 +31,7 @@ const ProfileDetails = () => {
       </View>
       <View style={styles.mid}>
         <Image
-          source={{ uri: state?.user?.avatar }}
+          source={{ uri: state?.user?.avatar + "?" + Math.random() }}
           style={styles.profileImage}
         />
       </View>
