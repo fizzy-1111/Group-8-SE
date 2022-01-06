@@ -4,11 +4,13 @@ import { View, Text, SafeAreaView, Image, StyleSheet } from "react-native";
 import { Colors, icons, images } from "../constants";
 import styled from "styled-components/native";
 import { useSelector } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 const Container = styled.TouchableWithoutFeedback``;
 
 const DietianProfile = () => {
   const state = useSelector((state) => state.auth.accountInformation);
+  const route = useRoute();
+  const user = route.params.info;
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
@@ -20,41 +22,39 @@ const DietianProfile = () => {
         >
           <Image source={icons.backbutton} />
         </Container>
-        <Text style={{ fontSize: 18, fontWeight: "bold" }}>Personal Dietitan</Text>
-        <Container
-        >
+        <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+          Personal Dietitan
+        </Text>
+        <Container>
           <Image />
         </Container>
       </View>
       <View style={styles.mid}>
-        <Image
-          source={{ uri: state?.user?.avatar }}
-          style={styles.profileImage}
-        />
+        <Image source={{ uri: user?.avatar }} style={styles.profileImage} />
       </View>
       <View style={styles.bot}>
         <View style={styles.setting}>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>Name</Text>
           <View style={{ alignItems: "flex-start", width: "60%" }}>
-            <Text style={{ fontSize: 16 }}>{state?.user?.fullname}</Text>
+            <Text style={{ fontSize: 16 }}>{user?.fullname}</Text>
           </View>
         </View>
         <View style={styles.setting}>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>Email</Text>
           <View style={{ alignItems: "flex-start", width: "60%" }}>
-            <Text style={{ fontSize: 16 }}>{state?.user?.email}</Text>
+            <Text style={{ fontSize: 16 }}>{user?.email}</Text>
           </View>
         </View>
         <View style={styles.setting}>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>Phone number</Text>
           <View style={{ alignItems: "flex-start", width: "60%" }}>
-            <Text style={{ fontSize: 16 }}>{state?.user?.phoneNumber}</Text>
+            <Text style={{ fontSize: 16 }}>{user?.phoneNumber}</Text>
           </View>
         </View>
         <View style={styles.setting}>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>About</Text>
           <View style={{ alignItems: "flex-start", width: "60%" }}>
-            <Text style={{ fontSize: 16 }}>{state?.user?.about}</Text>
+            <Text style={{ fontSize: 16 }}>{user?.about}</Text>
           </View>
         </View>
         <View style={styles.setting}></View>

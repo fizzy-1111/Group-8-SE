@@ -16,6 +16,7 @@ import styled from "styled-components/native";
 import { useDispatch, useSelector } from "react-redux";
 import { setAccountInformation } from "../redux/actions";
 import { useNavigation } from "@react-navigation/native";
+import { getPT } from "../server";
 const Container = styled.TouchableWithoutFeedback``;
 const getImage = () => {
   var img = images.imageprofile;
@@ -83,9 +84,16 @@ const Profile = () => {
     navigation.replace("Login");
   };
   const AlreadyHaveDietian = () => {
-    setVisible(true);
-    //navigation.navigate("Dietian Profile")
-    //navigation.navigate("Clien List");
+    if (state.user.userType == 0) {
+      //User and check if dietitant
+      getPT(state.token, (response) => {
+        if (response.status == 1) {
+          navigation.navigate("Dietian Profile", { info: response.data });
+        } else setVisible(true);
+      });
+    } else {
+      navigation.navigate("Clien List");
+    }
   };
   return (
     <View style={styles.container}>

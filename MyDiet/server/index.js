@@ -295,3 +295,19 @@ export const editProfile = async (
     onResponse({ status: 0, message: error });
   }
 };
+
+export const getPT = async (token, onResponse) => {
+  try {
+    if (!token) throw "Token is null";
+
+    const response = await fetch(`${DB_ENDPOINT}/user/personal_dietitian/`, {
+      headers: {
+        authorization: token,
+      },
+    });
+    const jsonResponse = await response.json();
+    onResponse(jsonResponse);
+  } catch (error) {
+    onResponse({ status: 0, message: error });
+  }
+};
