@@ -65,16 +65,15 @@ const renderContent = (onSend, text, setText, Data) => {
           marginTop: 50,
         }}
       >
-        <View style={{flex:1,height:500}}>
-        <FlatList
-          data={Data}
-          renderItem={renderCommentItem}
-          
-          keyboardShouldPersistTaps='always'
-          keyExtractor={(item) => item._id}
-        />
+        <View style={{ flex: 1, height: 500 }}>
+          <FlatList
+            data={Data}
+            renderItem={renderCommentItem}
+            keyboardShouldPersistTaps="always"
+            keyExtractor={(item) => item._id}
+          />
         </View>
-       
+
         <View
           style={{
             justifyContent: "space-between",
@@ -124,7 +123,6 @@ const renderCommentItem = ({ item, id }) => {
   );
 };
 const renderItem = ({ item, index }, sheetref, onPress, setPosFilter) => {
-
   return (
     <SafeAreaView style={styles.post}>
       <SafeAreaView style={styles.headBar}>
@@ -266,9 +264,9 @@ const Feed = () => {
       (response) => {
         if (response.status == 1) {
           Alert.alert("Upload post successfully");
-          getStatus(status).push(response.data);
+          getStatus(status).unshift(response.data);
           setStatus(status);
-          setTrash(!trash)
+          setTrash(!trash);
         }
       }
     );
@@ -430,7 +428,7 @@ const styles = StyleSheet.create({
     width: (windowWidth * 9) / 10,
     paddingLeft: 10,
     marginTop: 10,
-    height:70
+    height: 70,
   },
   iconStyle: {
     height: 35,
