@@ -197,7 +197,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column",
     marginHorizontal: 20,
-    flex: 4,
+    flex: 5,
+    marginTop:20,
   },
   profileImage: {
     width: 150,

@@ -84,11 +84,6 @@ const Login = () => {
             <B> Sign Up</B>
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button3} onPress={onPress}>
-          <Text style={styles.textStyle5}>
-            <B>Sign in as Guest</B>
-          </Text>
-        </TouchableOpacity>
       </SafeAreaView>
     </View>
   );

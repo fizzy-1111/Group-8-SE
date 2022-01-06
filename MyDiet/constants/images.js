@@ -8,6 +8,7 @@ export const beefsteak1=require("../assets/images/beefsteak.png");
 export const healthy=require("../assets/images/healthy.jpg");
 export const dietian=require("../assets/images/dietian.png")
 export const client=require("../assets/images/client.png")
+export const orangePhone=require("../assets/images/orangePhone.png")
 export default{
     intro1,
     avatar,
@@ -19,4 +20,5 @@ export default{
     healthy,
     dietian,
     client,
+    orangePhone,
 }

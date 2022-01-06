@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView } from "react-native";
 import { icons, Colors } from "../constants";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Feedk, FA, Feed, Profile } from "../screens";
+import { Feedk, FA, Feed, Profile,AboutUs } from "../screens";
 import TabComponent from "./TabButton";
 const Tab = createBottomTabNavigator();
 const Tabs = () => {
@@ -56,7 +56,7 @@ const Tabs = () => {
         />
         <Tab.Screen
           name="About us"
-          component={Feedk}
+          component={AboutUs}
           options={{
             tabBarButton: (props) => (
               <TabComponent iconname={icons.about} {...props} />

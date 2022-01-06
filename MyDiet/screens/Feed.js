@@ -519,7 +519,7 @@ const styles = StyleSheet.create({
   },
   btnTabActive: {
     backgroundColor: Colors.secondary,
-    borderRadius: 8,
+    borderRadius: 20,
     justifyContent: "center",
   },
   modalBackGround: {
