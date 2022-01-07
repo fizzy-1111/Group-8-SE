@@ -10,6 +10,7 @@ const Container = styled.TouchableWithoutFeedback``;
 const ProfileDetails = () => {
   const state = useSelector((state) => state.auth.accountInformation);
   const navigation = useNavigation();
+  console.log({uri: state?.user?.avatar})
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.top}>
@@ -31,36 +32,36 @@ const ProfileDetails = () => {
       </View>
       <View style={styles.mid}>
         <Image
-          source={{ uri: state?.user?.avatar + "?" + Math.random() }}
+          source={{ uri: state?.user?.avatar }}
           style={styles.profileImage}
         />
       </View>
       <View style={styles.bot}>
         <View style={styles.setting}>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>Name</Text>
-          <View style={{ alignItems: "flex-start", width: "60%" }}>
+          <View style={{ alignItems: "flex-start", width: "100%" }}>
             <Text style={{ fontSize: 16 }}>{state?.user?.fullname}</Text>
           </View>
         </View>
         <View style={styles.setting}>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>Email</Text>
-          <View style={{ alignItems: "flex-start", width: "60%" }}>
+          <View style={{ alignItems: "flex-start", width: "100%" }}>
             <Text style={{ fontSize: 16 }}>{state?.user?.email}</Text>
           </View>
         </View>
         <View style={styles.setting}>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>Phone number</Text>
-          <View style={{ alignItems: "flex-start", width: "60%" }}>
+          <View style={{ alignItems: "flex-start", width: "100%" }}>
             <Text style={{ fontSize: 16 }}>{state?.user?.phoneNumber}</Text>
           </View>
         </View>
         <View style={styles.setting}>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>About</Text>
-          <View style={{ alignItems: "flex-start", width: "60%" }}>
+          <View style={{ alignItems: "flex-start", width: "100%" }}>
             <Text style={{ fontSize: 16 }}>{state?.user?.about}</Text>
           </View>
         </View>
-        <View style={styles.setting}></View>
+        <View style={styles.setting2}></View>
       </View>
     </SafeAreaView>
   );
@@ -100,9 +101,9 @@ const styles = StyleSheet.create({
   },
   setting: {
     alignItems: "flex-start",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     flexDirection: "column",
-    marginHorizontal: 15,
+    marginHorizontal:10,
     flex: 1,
   },
   setting2: {
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     marginHorizontal: 15,
-    flex: 2,
+    flex: 1  ,
   },
 });
 export default ProfileDetails;

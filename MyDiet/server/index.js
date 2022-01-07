@@ -316,7 +316,7 @@ export const removePT = async (token, onResponse) => {
   try {
     if (!token) throw "Token is null";
 
-    const response = await fetch(`${DB_ENDPOINT}/user/unsubscribe/`, {
+    const response = await fetch(`${DB_ENDPOINT}/user/unsubscribe_dietitian/`, {
       headers: {
         authorization: token,
       },

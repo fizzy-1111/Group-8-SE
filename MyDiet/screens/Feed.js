@@ -107,6 +107,14 @@ const renderContent = (onSend, text, setText, Data) => {
   );
 };
 const renderCommentItem = ({ item, id }) => {
+  var dt = new Date(item.dateTime);
+
+  var year  = dt.getFullYear();
+  var month = (dt.getMonth() + 1).toString().padStart(2, "0");
+  var day   = dt.getDate().toString().padStart(2, "0");
+  var hour  = dt.getHours().toString().padStart(2, "0");
+  var minute  = dt.getMinutes().toString().padStart(2, "0");
+  var ampm = hour >= 12 ? " PM" : " AM";
   return (
     <SafeAreaView style={styles.headBar}>
       <Image
@@ -115,7 +123,7 @@ const renderCommentItem = ({ item, id }) => {
       />
       <View style={styles.infoview}>
         <Text style={styles.textTab}>
-          <B>{item.name}</B> {item.dateTime}
+          <B>{item.name}</B> {month+'/'+day+'/'+year+"    "+hour+':'+minute+ampm}
         </Text>
         <Text style={styles.textTab}>{item.content}</Text>
       </View>
@@ -123,6 +131,14 @@ const renderCommentItem = ({ item, id }) => {
   );
 };
 const renderItem = ({ item, index }, sheetref, onPress, setPosFilter) => {
+  var dt = new Date(item.dateTime);
+
+  var year  = dt.getFullYear();
+  var month = (dt.getMonth() + 1).toString().padStart(2, "0");
+  var day   = dt.getDate().toString().padStart(2, "0");
+  var hour  = dt.getHours().toString().padStart(2, "0");
+  var minute  = dt.getMinutes().toString().padStart(2, "0");
+  var ampm = hour >= 12 ? " PM" : " AM";
   return (
     <SafeAreaView style={styles.post}>
       <SafeAreaView style={styles.headBar}>
@@ -133,8 +149,8 @@ const renderItem = ({ item, index }, sheetref, onPress, setPosFilter) => {
         <View style={styles.infoview}>
           <Text style={styles.textTab}>
             <B>{item?.owner?.name}</B>
-          </Text>
-          <Text style={styles.textTab}>{item.dateTime}</Text>
+          </Text> 
+          <Text style={styles.textTab}>{month+'/'+day+'/'+year+"    "+hour+':'+minute+ampm}</Text>
         </View>
       </SafeAreaView>
       <View style={styles.midpost}>
@@ -256,6 +272,9 @@ const Feed = () => {
   };
 
   const onAddPost = (textPost) => {
+    if(image==null|textPost.length<=0){
+      Alert.alert("you must upload both image and text");
+    }
     uploadPostAsync(
       image,
       textPost,

@@ -76,7 +76,7 @@ const EditProfile = ({ navigation }) => {
       </View>
       <View style={styles.mid}>
         <Image
-          source={{ uri: state.user.avatar + "?" + Math.random() }}
+          source={{ uri: state.user.avatar }}
           style={styles.profileImage}
         />
         <TouchableOpacity style={styles.button} onPress={onChangeAvatar}>
@@ -163,7 +163,7 @@ const EditProfile = ({ navigation }) => {
         <View style={{ alignItems: "center", marginTop: 20 }}>
           <TouchableOpacity style={styles.button} onPress={onChange}>
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-              Save changes
+              Save
             </Text>
           </TouchableOpacity>
         </View>

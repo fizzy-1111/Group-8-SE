@@ -119,7 +119,7 @@ const Profile = () => {
         </SafeAreaView>
         <SafeAreaView style={styles.mid}>
           <Image
-            source={{ uri: state?.user?.avatar + "?" + Math.random() }}
+            source={{ uri: state?.user?.avatar}}
             style={styles.profileImage}
           />
           <Text style={{ fontSize: 24, marginTop: 5, fontWeight: "bold" }}>

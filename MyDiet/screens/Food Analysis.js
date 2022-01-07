@@ -25,6 +25,7 @@ const FA = () => {
   useEffect(() => {
     //Search on start
     searchFood(search, state.token, (response) => {
+      
       if (response.status == 1) {
         setData(response.data);
       }

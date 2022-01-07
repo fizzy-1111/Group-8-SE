@@ -57,7 +57,7 @@ const ChangePassword = () => {
       </View>
       <View style={styles.mid}>
         <Image
-          source={{ uri: state.user.avatar + "?" + Math.random() }}
+          source={{ uri: state.user.avatar}}
           style={styles.profileImage}
         />
         <View
@@ -149,7 +149,7 @@ const ChangePassword = () => {
         <View style={{ alignItems: "center", marginTop: 20 }}>
           <TouchableOpacity style={styles.button} onPress={onPress}>
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-              Save changes
+              Save
             </Text>
           </TouchableOpacity>
         </View>
