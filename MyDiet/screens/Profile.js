@@ -27,11 +27,11 @@ const getUsername = () => {
 };
 var user = {
   Title: "User Account",
-  Link: "My personal dietian",
+  Link: "My personal dietitian",
   Icon: images.client,
 };
 var dietian = {
-  Title: "Dietian Account",
+  Title: "Dietitian Account",
   Link: "My clients",
   Icon: images.dietian,
 };
@@ -104,7 +104,6 @@ const Profile = () => {
       navigation.navigate("Clien List");
     }
   };
-  console.log({ uri: state?.user?.avatar + "?" + Math.random()})
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.whitesnake}>
@@ -119,7 +118,7 @@ const Profile = () => {
         </SafeAreaView>
         <SafeAreaView style={styles.mid}>
           <Image
-            source={{ uri: state?.user?.avatar}}
+            source={{ uri: state?.user?.avatar + "?" + Math.random()}}
             style={styles.profileImage}
           />
           <Text style={{ fontSize: 24, marginTop: 5, fontWeight: "bold" }}>

@@ -44,7 +44,7 @@ const DietianList = () => {
         >
           <Image source={icons.backbutton} />
         </Container>
-        <Text style={{ fontSize: 18, fontWeight: "bold" }}>Find a Dietian</Text>
+        <Text style={{ fontSize: 18, fontWeight: "bold" }}>Find a Dietitian</Text>
         <Container>
           <Image />
         </Container>

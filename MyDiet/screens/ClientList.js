@@ -100,7 +100,7 @@ const ClientList = () => {
                     marginBottom: 10,
                   }}
                 >
-                  <B>Name</B>: {item.name}{" "}
+                  <B>Name</B>: {item.fullname}{" "}
                 </Text>
                 <View
                   style={{
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   top: {
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
     marginHorizontal: 22,

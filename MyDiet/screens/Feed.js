@@ -118,7 +118,7 @@ const renderCommentItem = ({ item, id }) => {
   return (
     <SafeAreaView style={styles.headBar}>
       <Image
-        source={{ uri: item.avatar }}
+        source={{ uri: item?.avatar + "?" + Math.random() }}
         style={{ width: 50, height: 50, borderRadius: 100 }}
       />
       <View style={styles.infoview}>
@@ -143,7 +143,7 @@ const renderItem = ({ item, index }, sheetref, onPress, setPosFilter) => {
     <SafeAreaView style={styles.post}>
       <SafeAreaView style={styles.headBar}>
         <Image
-          source={{ uri: item?.owner?.avatar }}
+          source={{ uri: item?.owner?.avatar+ "?" + Math.random() }}
           style={{ width: 50, height: 50, borderRadius: 100, margin: 10 }}
         />
         <View style={styles.infoview}>

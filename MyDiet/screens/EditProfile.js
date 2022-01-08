@@ -38,6 +38,7 @@ const EditProfile = ({ navigation }) => {
     });
     uploadAvatar(result.uri, state.token, (response) => {
       Alert.alert(response.message);
+      console.log(response)
       if (response.status != 1) return;
       state.user.avatar = response.data;
       dispatch(setAccountInformation({ ...state, random: Math.random() }));
@@ -55,6 +56,7 @@ const EditProfile = ({ navigation }) => {
       );
     });
   };
+  console.log(state.user.avatar)
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.top}>
@@ -76,7 +78,7 @@ const EditProfile = ({ navigation }) => {
       </View>
       <View style={styles.mid}>
         <Image
-          source={{ uri: state.user.avatar }}
+          source={{uri: state?.user?.avatar + "?" + Math.random()}}
           style={styles.profileImage}
         />
         <TouchableOpacity style={styles.button} onPress={onChangeAvatar}>

@@ -10,7 +10,7 @@ const Container = styled.TouchableWithoutFeedback``;
 const ProfileDetails = () => {
   const state = useSelector((state) => state.auth.accountInformation);
   const navigation = useNavigation();
-  console.log({uri: state?.user?.avatar})
+  console.log({uri: state?.user?.avatar  })
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.top}>
@@ -32,7 +32,7 @@ const ProfileDetails = () => {
       </View>
       <View style={styles.mid}>
         <Image
-          source={{ uri: state?.user?.avatar }}
+          source={{ uri: state?.user?.avatar + "?" + Math.random() }}
           style={styles.profileImage}
         />
       </View>

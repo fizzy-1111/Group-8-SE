@@ -21,6 +21,7 @@ const DietianProfile = () => {
   const route = useRoute();
   const user = route.params.info;
   const navigation = useNavigation();
+  console.log({ uri: state?.user?.avatar + "?" + Math.random()})
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.top}>
@@ -39,7 +40,7 @@ const DietianProfile = () => {
         </Container>
       </View>
       <View style={styles.mid}>
-        <Image source={{ uri: user?.avatar }} style={styles.profileImage} />
+        <Image source={{ uri: user?.avatar + "?" + Math.random() }} style={styles.profileImage} />
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
